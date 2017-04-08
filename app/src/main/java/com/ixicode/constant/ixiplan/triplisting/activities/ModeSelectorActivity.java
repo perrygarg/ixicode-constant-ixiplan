@@ -38,17 +38,20 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
     private void init() {
         findViewsById();
 
-        presenter = new ModeSelectorPresenter(this);
+        presenter = new ModeSelectorPresenter(this, getApplicationContext());
 
 //        String[] citiesIds = getIntent().getStringArrayExtra(AppConstant.CITIES_IDS);
 
         String[] citiesIds = new String[] {"1065223", "1075798"};
 
         if(!AppUtil.isArrayEmpty(citiesIds)) {
-
+            doFetchModes(citiesIds);
         }
         
     }
+
+    private void doFetchModes(String[] citiesIds) {
+        presenter.fetchModes(citiesIds[0], citiesIds[1]);    }
 
     private void findViewsById() {
         plane = (FloatingActionButton) findViewById(R.id.plane);
@@ -92,7 +95,18 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
     @Override
     public void onSuccessFetchingModes(ArrayList<String> avlblModes) {
-
+if(avlblModes.contains("flight")) {
+            showFab(plane);
+        }
+        if(avlblModes.contains("train")) {
+            showFab(train);
+        }
+        if(avlblModes.contains("bus")) {
+            showFab(bus);
+        }
+        if(avlblModes.contains("car")) {
+            showFab(car);
+        }
     }
 
     @Override

@@ -25,10 +25,7 @@ public interface WebConstants
 	 * Web Service Task Codes
 	 */
 	int WS_CODE_AUTOCOMPLETE_PLACE = 1;
-	int WS_CODE_FORGOT_PASSWORD = 2;
-	int WS_CODE_RESET_PASSWORD = 3;
-	int WS_CODE_SEARCH_SUGGESTION = 4;
-	int WS_CODE_SEARCH_CLAIM_LIST = 5;
+	int WS_CODE_FETCH_MODES_BW_PLACES = 2;
 
 	/**
 	 * Web Service URLs

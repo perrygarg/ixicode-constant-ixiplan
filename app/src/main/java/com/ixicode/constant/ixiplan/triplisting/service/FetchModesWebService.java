@@ -3,14 +3,15 @@ package com.ixicode.constant.ixiplan.triplisting.service;
 import android.content.Context;
 
 import com.android.volley.Request;
-import com.ixicode.constant.ixiplan.common.network.WebConstants;
+import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.constants.AppConstant;import com.ixicode.constant.ixiplan.common.network.WebConstants;
 import com.ixicode.constant.ixiplan.common.network.WebManager;
 import com.ixicode.constant.ixiplan.common.network.WebService;
 import com.ixicode.constant.ixiplan.common.network.WebServiceListener;
 import com.ixicode.constant.ixiplan.common.network.volley.HttpClient;
 import com.ixicode.constant.ixiplan.triplisting.model.FetchModesBetweenLocsModel;
 import com.ixicode.constant.ixiplan.triplisting.model.FetchModesBetweenLocsRequest;
-
+import com.ixicode.constant.ixiplan.triplisting.model.response.FetchModesBetweenLocsModel;
 import java.util.Locale;
 
 /**
@@ -22,7 +23,7 @@ public class FetchModesWebService extends WebService{
 
     public FetchModesWebService(int taskCode, WebServiceListener serviceListener, Context context) {
         super(taskCode, serviceListener, context);
-    }
+        this.context = context;    }
 
     @Override
     public void getData(Object... args)
@@ -40,15 +41,13 @@ public class FetchModesWebService extends WebService{
     {
         if(serviceListener != null) {
 
-//            AutocompletePlaceResponseModel[] responses = (AutocompletePlaceResponseModel[]) object;
-//            if (!AppUtil.isArrayEmpty(responses) && responses[0] != null) {
-//                AutocompletePlaceResponseModel response = responses[0];
-//                serviceListener.onServiceSuccess(responses, taskCode);
-//
-//            } else {
-//
-//                serviceListener.onServiceError(context.getString(R.string.error_tech_error), taskCode, AppConstant.ERROR_TYPE_SIMPLE);
-//            }
+            FetchModesBetweenLocsModel response = (FetchModesBetweenLocsModel) object;
+            if (response != null) {
+                FetchModesBetweenLocsModel[] responses = new FetchModesBetweenLocsModel[] {response};
+                serviceListener.onServiceSuccess(responses, taskCode);
+            } else {
+                serviceListener.onServiceError(context.getString(R.string.error_tech_error), taskCode, AppConstant.ERROR_TYPE_SIMPLE);
+            }
         }
     }
 }

@@ -80,7 +80,7 @@ public class CProgressHUD implements OnCloseListener {
         mIsAutoDismiss = true;
 
         setStyle(Style.SPIN_INDETERMINATE);
-    }
+setCancellable(false);    }
 
 
 

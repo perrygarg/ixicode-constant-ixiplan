@@ -21,4 +21,5 @@
     <dimen name="separator_margin">2dp</dimen>
     <dimen name="separator_height">1dp</dimen>
     <dimen name="view_padding">20dp</dimen>
+    <dimen name="custom_progress_size">65dp</dimen>
 </resources>

@@ -40,6 +40,7 @@
                 android:src="@drawable/ic_airplanemode_active_white_36dp"
                 app:borderWidth="@dimen/fab_border_width"
                 app:elevation="0dp"
+                android:visibility="gone"
                 app:fabSize="normal"
                 app:rippleColor="@color/colorPrimary" />
 
@@ -49,6 +50,7 @@
                 android:layout_height="@dimen/fab_size"
                 android:layout_marginLeft="@dimen/fab_layout_margin"
                 android:layout_marginRight="@dimen/fab_layout_margin"
+                android:visibility="gone"
                 android:src="@drawable/ic_train_white_36dp"
                 app:borderWidth="@dimen/fab_border_width"
                 app:elevation="0dp"
@@ -63,6 +65,7 @@
                 android:layout_marginRight="@dimen/fab_layout_margin"
                 android:src="@drawable/ic_directions_bus_white_36dp"
                 app:borderWidth="@dimen/fab_border_width"
+                android:visibility="gone"
                 app:elevation="0dp"
                 app:fabSize="normal"
                 app:rippleColor="@color/colorPrimary" />
@@ -75,6 +78,7 @@
                 android:layout_marginRight="@dimen/fab_layout_margin"
                 android:src="@drawable/ic_directions_car_white_36dp"
                 app:borderWidth="@dimen/fab_border_width"
+                android:visibility="gone"
                 app:elevation="0dp"
                 app:fabSize="normal"
                 app:rippleColor="@color/colorPrimary" />

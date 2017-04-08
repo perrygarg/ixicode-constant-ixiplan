@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.ixicode.constant.ixiplan.common.network.volley.HttpClient;
 import com.ixicode.constant.ixiplan.dashboard.PlaceAutocompleteService;
-
+import com.ixicode.constant.ixiplan.triplisting.service.FetchModesWebService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +22,8 @@ public class WebManager
         {
             case WebConstants.WS_CODE_AUTOCOMPLETE_PLACE:
                 return new PlaceAutocompleteService(taskCode, serviceListener, context);
-
+case WebConstants.WS_CODE_FETCH_MODES_BW_PLACES:
+                return new FetchModesWebService(taskCode, serviceListener, context);
 
         }
 
