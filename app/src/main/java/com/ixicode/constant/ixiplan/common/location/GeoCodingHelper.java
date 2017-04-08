@@ -6,13 +6,16 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.common.util.MyLogs;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * Created by jaswinder.singh on 3/7/2016.
+ */
 public class GeoCodingHelper
 {
     Context context;

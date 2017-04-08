@@ -2,7 +2,9 @@ package com.ixicode.constant.ixiplan.dashboard.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,14 +13,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ProgressBar;
 
 import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.fragment.BaseFragment;
+import com.ixicode.constant.ixiplan.common.location.GeoLocation;
+import com.ixicode.constant.ixiplan.common.location.GoogleLocationHandler;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
 import com.ixicode.constant.ixiplan.common.util.AppUtil;
+import com.ixicode.constant.ixiplan.common.util.UIUtil;
 import com.ixicode.constant.ixiplan.dashboard.DashboardActivity;
 import com.ixicode.constant.ixiplan.dashboard.InputFormPresenter;
 import com.ixicode.constant.ixiplan.dashboard.adapter.AutocompletePlaceAdapter;
@@ -27,6 +34,9 @@ import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceRequestMode
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
 import com.ixicode.constant.ixiplan.dashboard.util.DashboardConstant;
 import com.ixicode.constant.ixiplan.locationsearch.LocationSearchActivity;
+import com.ixicode.constant.ixiplan.permissionhandling.PermissionConstants;
+import com.ixicode.constant.ixiplan.permissionhandling.PermissionManager;
+import com.ixicode.constant.ixiplan.permissionhandling.PermissionRequestModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +53,8 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
     private AutocompletePlaceRequestModel autocompletePlaceRequestModel = null;
     private EditText fromInput = null;
     private EditText toInput = null;
+    private ImageView imageViewCurrentLoc = null;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +77,7 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
 
         fromInput = (EditText) view.findViewById(R.id.from_input);
         toInput = (EditText) view.findViewById(R.id.to_input);
+        imageViewCurrentLoc = (ImageView) view.findViewById(R.id.imageViewCurrentLoc);
 
 
 //        fromInput.addTextChangedListener(new HandleTextChangeListener(DashboardConstant.FROM_AUTOCOMPLETE));
@@ -98,6 +111,10 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
                     inputFormListener.navigateToLocationScreen(DashboardConstant.REQUEST_CODE_TO_LOCATION);
 
                     break;
+
+                case R.id.imageViewCurrentLoc:
+
+                    break;
             }
 
         }
@@ -118,6 +135,7 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
         void navigateToLocationScreen(int code);
         void handleToLocation();
         void handleFromLocation();
+        void fetchCurrentLocation();
     }
 
     public void handleToLocationResult(AutocompletePlaceResponseModel response)
@@ -129,6 +147,12 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
     public void handleFromLocationResult(AutocompletePlaceResponseModel response)
     {
         fromInput.setText(AppUtil.setStringNotNull(response.cityName));
+    }
+
+
+    public void setCurrentLocation(String location)
+    {
+        fromInput.setText(location);
     }
 
 

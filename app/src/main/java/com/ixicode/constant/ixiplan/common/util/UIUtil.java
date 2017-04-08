@@ -3,15 +3,18 @@ package com.ixicode.constant.ixiplan.common.util;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.IBinder;
 import android.provider.Settings;
 
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,7 +25,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.ixicode.constant.ixiplan.common.fragment.ConfirmationDialogFragment;
 import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
+
+import java.util.HashMap;
 
 
 public class UIUtil
@@ -408,4 +416,98 @@ public class UIUtil
 //
 //		return resourceId;
 //	}
+
+	/**
+	 * Check if GooglePlayServices available and updated on the device
+	 * @param activity - Activity
+	 * @param showErrorMessage - if to show any Error Dialog or Message to User to update/install Google Play Services.
+	 * @return
+	 */
+	public static boolean isGooglePlayServiceAvailable(final FragmentActivity activity, boolean showErrorMessage, String title, String message, String positive, String negative, boolean isCancelable)
+	{
+		boolean isGooglePlaServiceAvailble = true;
+
+		final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+		final int statusCode = googleApiAvailability.isGooglePlayServicesAvailable(activity);
+
+		if(statusCode == ConnectionResult.SERVICE_MISSING || statusCode == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED || statusCode == ConnectionResult.SERVICE_DISABLED || statusCode == ConnectionResult.SERVICE_UPDATING || statusCode == ConnectionResult.SERVICE_INVALID)
+		{
+			isGooglePlaServiceAvailble = false;
+
+			if(showErrorMessage)
+			{
+				showUpdatePlayServiceDialog(googleApiAvailability, statusCode, activity, title,  message, positive, negative, isCancelable);
+			}
+		}
+
+		return isGooglePlaServiceAvailble;
+	}
+
+	/**
+	 * Show Google Play Service Error Dialog
+	 * @param googleApiAvailability
+	 * @param statusCode
+	 * @param activity
+	 * @param title
+	 * @param message
+	 * @param positive
+	 * @param negative
+	 * @param isCancelable
+	 */
+	public static void showUpdatePlayServiceDialog(final GoogleApiAvailability googleApiAvailability, final int statusCode, final FragmentActivity activity, String title, String message, String positive, String negative, boolean isCancelable)
+	{
+		ConfirmationDialogFragment dialogFragment = ConfirmationDialogFragment.getInstance(new ConfirmationDialogFragment.ConfirmationDialogListener()
+		{
+			@Override
+			public void onDialogButtonClick(HashMap<String, Object> data, boolean isActionConfirmed)
+			{
+				if (isActionConfirmed)
+				{
+					PendingIntent pendingIntent = googleApiAvailability.getErrorResolutionPendingIntent(activity, statusCode, 101);
+					try
+					{
+						pendingIntent.send();
+					}
+					catch (PendingIntent.CanceledException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		}, null, title, message, positive, negative, true);
+
+		//Show
+		dialogFragment.show(activity.getSupportFragmentManager(), "");
+	}
+
+	/*************8 Location Check ************8/
+	 *
+	 */
+	public static boolean isLocationServiceOn(Context context)
+	{
+		boolean isEnabled = true;
+
+		LocationManager lm = null;
+		boolean gps_enabled = false;
+		boolean network_enabled = false;
+
+		lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+		try
+		{
+			gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		}
+		catch(Exception ex){}
+		try
+		{
+			network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		}
+		catch(Exception ex){}
+
+		if(!gps_enabled && !network_enabled)
+		{
+			isEnabled = false;
+		}
+
+		return isEnabled;
+	}
 }

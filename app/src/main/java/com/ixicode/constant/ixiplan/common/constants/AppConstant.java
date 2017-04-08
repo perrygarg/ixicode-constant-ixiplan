@@ -1,5 +1,7 @@
 package com.ixicode.constant.ixiplan.common.constants;
 
+import android.app.AlarmManager;
+
 public interface AppConstant
 {
 	int ERROR_TYPE_SIMPLE = 1;
@@ -60,5 +62,9 @@ public interface AppConstant
 
 
 	String CITY_LOCATION = "city_location";
+
+	//Location Update Time
+	long TIME_LOCATION_UPDATE_INTERVAL = AlarmManager.INTERVAL_HOUR;
+	long TIME_CURRENT_LOCATION_TIMEOUT = 10000;
 
 }

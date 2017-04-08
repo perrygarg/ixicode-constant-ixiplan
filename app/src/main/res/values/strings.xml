@@ -8,4 +8,19 @@
     <string name="error_tech_error">Seems there\'s an error at our end</string>
     <string name="dashboard_title">Dashboard</string>
     <string name="title_activity_location_search">LocationSearchActivity</string>
+
+    <string name="label_button_ok_go_ahead">Ok, go ahead</string>
+    <string name="label_button_not_now">Not now</string>
+    <string name="text_unknown_address">Unknown Address</string>
+
+    <!-- Google Play Service Dialog -->
+    <string name="dialog_title_update_play_services">Update Google Play service</string>
+    <string name="dialog_message_update_play_services_for_location">Update Google Play services to auto locate your current location</string>
+    <string name="dialog_message_update_play_services_for_login">Update Google Play services to login with Google Account</string>
+    <string name="label_button_update">Update</string>
+    <string name="label_button_later">Later</string>
+
+    <!--Permission Handling Dialog -->
+    <string name="msg_permission_location_rationale">We need Location Permission to Find your current location</string>
+    <string name="msg_permission_location_denied">You have denied location permission, Please enable to auto detect your current location</string>
 </resources>
