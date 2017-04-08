@@ -19,6 +19,10 @@ public interface ModeSelectorContract {
 
         void routeDetailsForRequestedMode(DataModelResponse.RoutesModelResponse route);
 
+        void routeDetailsForRequestedMode(DataModelResponse.FastestRouteResponse routeResponse);
+
+        void routeDetailsForRequestedMode(DataModelResponse.CheapestRouteResponse routeResponse);
+
     }
 
     interface Presenter {

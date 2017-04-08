@@ -2,11 +2,13 @@ package com.ixicode.constant.ixiplan.triplisting.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by PerryGarg on 08-04-2017.
  */
 
-public class DataModelResponse {
+public class DataModelResponse implements Serializable{
 
     @SerializedName("originName")
     public String originName;
@@ -23,7 +25,7 @@ public class DataModelResponse {
     @SerializedName("cheapestRoute")
     public CheapestRouteResponse cheapestRoute;
 
-    public class FastestRouteResponse {
+    public class FastestRouteResponse implements Serializable{
 
         @SerializedName("price")
         public Integer price;
@@ -54,7 +56,7 @@ public class DataModelResponse {
 
     }
 
-    public class RoutesModelResponse {
+    public class RoutesModelResponse implements Serializable{
 
         @SerializedName("price")
         public Integer price;
@@ -90,7 +92,7 @@ public class DataModelResponse {
         public FirstStepResponseModel firstStep;
     }
 
-    private class CheapestRouteResponse {
+    public class CheapestRouteResponse implements Serializable{
 
         @SerializedName("price")
         public Integer price;

@@ -1,5 +1,6 @@
 package com.ixicode.constant.ixiplan.triplisting.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -118,7 +119,23 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
     @Override
     public void routeDetailsForRequestedMode(DataModelResponse.RoutesModelResponse route) {
+        Intent intent = new Intent(ModeSelectorActivity.this, ModesListingActivity.class);
+        intent.putExtra(AppConstant.ROUTE_MODEL_SERIALIZED,route);
+        startActivity(intent);
+    }
 
+    @Override
+    public void routeDetailsForRequestedMode(DataModelResponse.FastestRouteResponse routeResponse) {
+        Intent intent = new Intent(ModeSelectorActivity.this, ModesListingActivity.class);
+        intent.putExtra(AppConstant.FASTEST_MODEL_SERIALIZED,routeResponse);
+        startActivity(intent);
+    }
+
+    @Override
+    public void routeDetailsForRequestedMode(DataModelResponse.CheapestRouteResponse routeResponse) {
+        Intent intent = new Intent(ModeSelectorActivity.this, ModesListingActivity.class);
+        intent.putExtra(AppConstant.CHEAPEST_MODEL_SERIALIZED,routeResponse);
+        startActivity(intent);
     }
 
     @Override

@@ -2,11 +2,13 @@ package com.ixicode.constant.ixiplan.triplisting.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by PerryGarg on 08-04-2017.
  */
 
-public class CarriersResponseModel {
+public class CarriersResponseModel implements Serializable{
 
     @SerializedName("code")
     public String code;

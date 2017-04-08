@@ -2,17 +2,22 @@ package com.ixicode.constant.ixiplan.triplisting.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by PerryGarg on 09-04-2017.
  */
 
-public class FirstStepCheapestModel {
+public class FirstStepCheapestModel implements Serializable{
 
     @SerializedName("carriers")
     public CarriersCheapestModel[] carriers;
 
+    @SerializedName("mode")
+    public String mode;
 
-    private class CarriersCheapestModel {
+
+    public class CarriersCheapestModel implements Serializable{
 
         @SerializedName("code")
         public String code;

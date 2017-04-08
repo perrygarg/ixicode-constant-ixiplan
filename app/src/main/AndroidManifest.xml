@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".application.IxiPlanApp"
         android:allowBackup="true"
         android:icon="@mipmap/ixiplan_launcher"
         android:label="@string/app_name"
@@ -15,20 +16,19 @@
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/AppThemeFullscreen">
-
-        </activity>
-        <activity android:name=".dashboard.DashboardActivity" />
-        <activity
-            android:name=".locationsearch.LocationSearchActivity"
-            android:label="@string/title_activity_location_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".triplisting.activities.ModeSelectorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".dashboard.DashboardActivity" />
+        <activity
+            android:name=".locationsearch.LocationSearchActivity"
+            android:label="@string/title_activity_location_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".triplisting.activities.ModeSelectorActivity"></activity>
+        <activity android:name=".triplisting.activities.ModesListingActivity"></activity>
     </application>
 
 </manifest>

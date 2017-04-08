@@ -2,11 +2,13 @@ package com.ixicode.constant.ixiplan.triplisting.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by PerryGarg on 08-04-2017.
  */
 
-public class FirstStepResponseModel {
+public class FirstStepResponseModel implements Serializable{
 
     @SerializedName("origin")
     public String origin;

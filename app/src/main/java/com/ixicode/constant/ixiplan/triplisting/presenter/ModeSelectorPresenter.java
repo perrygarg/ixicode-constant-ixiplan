@@ -43,9 +43,20 @@ public class ModeSelectorPresenter implements ModeSelectorContract.Presenter, We
 
     @Override
     public void onClickOnMode(String modeId) {
-        int index = modes.indexOf(modeId);
-        DataModelResponse.RoutesModelResponse route = model.data.routes[index];
-        view.routeDetailsForRequestedMode(route);
+        if(modes != null && modes.contains(modeId)) {
+            int index = modes.indexOf(modeId);
+            DataModelResponse.RoutesModelResponse route = model.data.routes[index];
+            view.routeDetailsForRequestedMode(route);
+        }
+        else {
+            if (modeId.equals("fastest")) {
+                DataModelResponse.FastestRouteResponse routeResponse = model.data.fastestRoute;
+                view.routeDetailsForRequestedMode(routeResponse);
+            } else if(modeId.equals("cheapest")) {
+                DataModelResponse.CheapestRouteResponse routeResponse = model.data.cheapestRoute;
+                view.routeDetailsForRequestedMode(routeResponse);
+            }
+        }
     }
 
     @Override
