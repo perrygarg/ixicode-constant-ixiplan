@@ -6,6 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:buttonStyle">@style/buttonTheme</item>
+        <item name="buttonStyle">@style/buttonTheme</item>
+        <item name="android:autoCompleteTextViewStyle">@style/autocompleteTextViewStyle</item>
+        <item name="autoCompleteTextViewStyle">@style/autocompleteTextViewStyle</item>
     </style>
 
     <style name="AppThemeFullscreen" parent="AppTheme">
@@ -21,6 +27,16 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="buttonTheme" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="autocompleteTextViewStyle" parent="Base.Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
     </style>
 
 </resources>

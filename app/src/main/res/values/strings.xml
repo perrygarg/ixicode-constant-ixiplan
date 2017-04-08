@@ -6,4 +6,5 @@
     <string name="error_time_out_error">Seems the connection timed out</string>
     <string name="error_netwrok_error">Please check your network</string>
     <string name="error_tech_error">Seems there\'s an error at our end</string>
+    <string name="dashboard_title">Dashboard</string>
 </resources>
