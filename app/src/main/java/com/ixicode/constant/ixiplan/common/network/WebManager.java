@@ -23,6 +23,7 @@ public class WebManager
             case WebConstants.WS_CODE_AUTOCOMPLETE_PLACE:
                 return new PlaceAutocompleteService(taskCode, serviceListener, context);
 
+
         }
 
         return null;

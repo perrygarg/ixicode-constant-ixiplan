@@ -2,46 +2,40 @@ package com.ixicode.constant.ixiplan.dashboard.adapter;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.util.AppUtil;
+import com.ixicode.constant.ixiplan.dashboard.contract.InputFormContract;
+import com.ixicode.constant.ixiplan.dashboard.fragment.InputFormFragment;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AutocompletePlaceAdapter extends BaseAdapter
+public class AutocompletePlaceAdapter extends ArrayAdapter<AutocompletePlaceResponseModel>
 {
     private LayoutInflater layoutInflater = null;
     private ArrayList<AutocompletePlaceResponseModel> arrayList = null;
+    private InputFormFragment inputFormFragment = null;
+    private int mode = 0;
 
-    public AutocompletePlaceAdapter(Context context, ArrayList<AutocompletePlaceResponseModel> arrayList)
-    {
-        Application ixiPlanApp = (Application) context;
-        this.arrayList = arrayList;
-        layoutInflater = (LayoutInflater) ixiPlanApp.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public AutocompletePlaceAdapter(@NonNull Context context, List<AutocompletePlaceResponseModel> response) {
+        super(context, android.R.layout.simple_list_item_1, response);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
-    @Override
-    public int getCount() {
-        return AppUtil.isCollectionEmpty(arrayList) ? 0 : arrayList.size();
-    }
-
-    @Override
-    public AutocompletePlaceResponseModel getItem(int position) {
-        return arrayList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
 
     @NonNull
     @Override
@@ -56,9 +50,14 @@ public class AutocompletePlaceAdapter extends BaseAdapter
 
         TextViewHolder textViewHolder = onBindView(view);
 
-        String place = getItem(position).cityName;
+        AutocompletePlaceResponseModel model = getItem(position);
+        String place = model.cityName;
 
         textViewHolder.textViewName.setText(AppUtil.setStringNotNull(place));
+        textViewHolder.textViewName.setTag(R.id.CITY_ID, model.cityId);
+        textViewHolder.textViewName.setTag(R.id.CITY_X_ID, model.xId);
+
+        textViewHolder.textViewName.setOnClickListener(new HandleClickListener());
 
         return view;
     }
@@ -71,14 +70,14 @@ public class AutocompletePlaceAdapter extends BaseAdapter
         TextViewHolder textViewHolder = new TextViewHolder();
         textViewHolder.textViewName = (TextView) view.findViewById(R.id.textViewName);
 
-        view.setTag(textViewHolder);
+        view.setTag(R.id.VIEW, textViewHolder);
 
         return view;
     }
 
     private TextViewHolder onBindView(View view)
     {
-        TextViewHolder textViewHolder = (TextViewHolder) view.getTag();
+        TextViewHolder textViewHolder = (TextViewHolder) view.getTag(R.id.VIEW);
         return textViewHolder;
     }
 
@@ -87,10 +86,33 @@ public class AutocompletePlaceAdapter extends BaseAdapter
         TextView textViewName = null;
     }
 
-    public void setPlaceArraylist(ArrayList<AutocompletePlaceResponseModel> autocompletePlaceResponseModels)
-    {
-        this.arrayList = autocompletePlaceResponseModels;
-        notifyDataSetChanged();
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                return null;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            }
+
+            @Override
+            public CharSequence convertResultToString(Object resultValue) {
+                AutocompletePlaceResponseModel responseModel = (AutocompletePlaceResponseModel) resultValue;
+                return responseModel.cityName;
+            }
+        };
     }
 
+    private class HandleClickListener implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v) {
+            System.out.println("view...........");
+        }
+    }
 }

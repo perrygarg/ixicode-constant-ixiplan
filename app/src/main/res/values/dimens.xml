@@ -12,6 +12,7 @@
     <dimen name="text_size_normal">15sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_size_xxlarge">24sp</dimen>
     <dimen name="progress_size">25dp</dimen>
     <dimen name="fab_border_width">1dp</dimen>

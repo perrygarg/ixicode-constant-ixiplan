@@ -1,0 +1,162 @@
+package com.ixicode.constant.ixiplan.common.adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
+public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
+    private BaseRecyclerAdapterListener baseRecyclerAdapterListener =  null;
+    private LayoutInflater layoutInflater = null;
+
+    private int total = 0;
+    private int count = 0;
+    private boolean isLoadMore = true;
+    private boolean isPagination = true;
+
+    private final int ITEM_PROGRESS_SHOWN = 100;
+    private final int ITEM_ERROR_SHOWN = 101;
+    private Context context = null;
+
+    protected BaseRecyclerAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener, boolean isPagination, Context context)
+    {
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.baseRecyclerAdapterListener = baseRecyclerAdapterListener;
+        this.isPagination = isPagination;
+        this.context = context;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder viewHolder = null;
+
+        switch (viewType) {
+            case ITEM_PROGRESS_SHOWN:
+
+//                View view = layoutInflater.inflate(R.layout.progress_dialog_layout, parent, false);
+//                viewHolder = new ViewHolderProgressItem(view);
+//                view.setVisibility(View.GONE);
+
+                break;
+        }
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    {
+        int viewType = getItemViewType(position);
+
+        switch (viewType)
+        {
+            case ITEM_PROGRESS_SHOWN:
+//                displayProgress(holder, position);
+                break;
+        }
+
+    }
+
+//    private void displayProgress(RecyclerView.ViewHolder holder, int position)
+//    {
+////        if(isLoadMore) {
+//            if (count < total) {
+//
+//                ViewHolderProgressItem viewHolderProgressItem = (ViewHolderProgressItem) holder;
+//
+//                if (position < total)
+//                {
+//                    if(isLoadMore) {
+//                        Animation myRotation = AnimationUtils.loadAnimation(PitzopBusinessApp.appContext, R.anim.progress_anim);
+//                        viewHolderProgressItem.imageViewNeedle.startAnimation(myRotation);
+//                        viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.VISIBLE);
+//
+//                        if (baseRecyclerAdapterListener != null) {
+//                            baseRecyclerAdapterListener.loadMore();
+//                        }
+//                    }
+//                    else
+//                    {
+//                        viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.INVISIBLE);
+//
+//                        if (baseRecyclerAdapterListener != null) {
+//                            baseRecyclerAdapterListener.handleError();
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    viewHolderProgressItem.imageViewNeedle.clearAnimation();
+//                    viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.INVISIBLE);
+//                }
+//            }
+////        }
+////        else
+////        {
+////            displayError();
+////        }
+//    }
+
+//    private void displayError()
+//    {
+//        if(baseRecyclerAdapterListener != null)
+//        {
+//            baseRecyclerAdapterListener.handleError();
+//        }
+//    }
+
+//    private static class ViewHolderProgressItem extends RecyclerView.ViewHolder
+//    {
+//        RelativeLayout relativeLayoutBottom = null;
+//        ImageView imageViewMeter = null;
+//        ImageView imageViewNeedle = null;
+//
+//        public ViewHolderProgressItem(View itemView)
+//        {
+//            super(itemView);
+//
+//            imageViewMeter = (ImageView) itemView.findViewById(R.id.imageViewMeter);
+//            relativeLayoutBottom = (RelativeLayout) itemView.findViewById(R.id.relativeLayoutBottom);
+//            imageViewNeedle = (ImageView) itemView.findViewById(R.id.imageViewNeedle);
+//        }
+//    }
+
+    @Override
+    public int getItemCount()
+    {
+        count = getCount();
+//        int temp = count == 0 ? 1 : count;
+
+        return count;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        if((position + 1) == count && isPagination)
+        {
+            return ITEM_PROGRESS_SHOWN;
+        }
+
+        return getViewType(position);
+    }
+
+    public void setLoadMore(boolean isLoadMore)
+    {
+        this.isLoadMore = isLoadMore;
+    }
+
+    public void setTotal(int total)
+    {
+        this.total = total;
+    }
+
+    protected abstract int getCount();
+
+    protected abstract int getViewType(int position);
+
+//    protected abstract RecyclerView.ViewHolder onCreateViewHolder();
+}
+

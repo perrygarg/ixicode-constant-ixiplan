@@ -14,6 +14,8 @@ import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceRequestModel;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
 
+import java.util.Locale;
+
 /**
  * Created by akash on 8/4/17.
  */
@@ -34,8 +36,10 @@ public class PlaceAutocompleteService extends WebService
     {
         AutocompletePlaceRequestModel autocompletePlaceRequestModel = (AutocompletePlaceRequestModel) args[0];
 
+        String url = String.format(Locale.US, WebConstants.AUTOCOMPLETE_PLACE_URL, autocompletePlaceRequestModel.placeStr);
+
         HttpClient httpClient = new HttpClient(context);
-        httpClient.sendGSONRequest(Request.Method.GET, WebConstants.AUTOCOMPLETE_PLACE_URL, null, AutocompletePlaceResponseModel[].class, WebManager.getHeaders(), this, this, tag);
+        httpClient.sendGSONRequest(Request.Method.GET, url, null, AutocompletePlaceResponseModel[].class, WebManager.getHeaders(), this, this, tag);
     }
 
     @Override

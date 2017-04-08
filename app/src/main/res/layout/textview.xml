@@ -6,6 +6,8 @@
     android:layout_height="@dimen/autocomplete_textview_height"
     android:text="Delhi"
     android:textSize="@dimen/text_size_normal"
+    android:textColor="@color/text_color"
+    android:padding="10dp"
     >
 
 </TextView>

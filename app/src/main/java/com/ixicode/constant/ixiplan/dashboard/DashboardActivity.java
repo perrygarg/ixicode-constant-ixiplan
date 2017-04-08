@@ -1,5 +1,6 @@
 package com.ixicode.constant.ixiplan.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -10,10 +11,18 @@ import com.ixicode.constant.ixiplan.common.util.UIUtil;
 import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
 import com.ixicode.constant.ixiplan.dashboard.fragment.InputFormFragment;
 import com.ixicode.constant.ixiplan.dashboard.fragment.TrendingTripsFragment;
+import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
+import com.ixicode.constant.ixiplan.dashboard.util.DashboardConstant;
+import com.ixicode.constant.ixiplan.locationsearch.LocationConstant;
+import com.ixicode.constant.ixiplan.locationsearch.LocationSearchActivity;
 
-public class DashboardActivity extends BaseActivity implements DashboardContract.View {
+public class DashboardActivity extends BaseActivity
+        implements DashboardContract.View, InputFormFragment.InputFormListener {
     FrameLayout inputFormContainer, trendingListContainer;
     private CProgressHUD progressDialog = null;
+
+    private final String TAG_INPUT_FRAGMENT = "TAG_INPUT_FRAGMENT";
+    private final String TAG_TRENDING_FRAGMENT = "TAG_TRENDING_FRAGMENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +39,10 @@ public class DashboardActivity extends BaseActivity implements DashboardContract
         trendingListContainer = (FrameLayout) findViewById(R.id.trending_trips_fragment_holder);
 
         InputFormFragment inputFormFragment = new InputFormFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.input_form_fragment_holder, inputFormFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.input_form_fragment_holder, inputFormFragment, TAG_INPUT_FRAGMENT).commit();
 
         TrendingTripsFragment trendingTripsFragment = new TrendingTripsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.trending_trips_fragment_holder, trendingTripsFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.trending_trips_fragment_holder, trendingTripsFragment, TAG_TRENDING_FRAGMENT).commit();
 
     }
 
@@ -58,4 +67,52 @@ public class DashboardActivity extends BaseActivity implements DashboardContract
     public void onFailureFetchCurrentLocation(ErrorDisplay errorDisplay) {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+
+            switch (requestCode) {
+                case DashboardConstant.REQUEST_CODE_FROM_LOCATION:
+
+                    InputFormFragment inputFormFragment = (InputFormFragment) getSupportFragmentManager().findFragmentByTag(TAG_INPUT_FRAGMENT);
+                    AutocompletePlaceResponseModel autocompletePlaceResponseModel = data.getParcelableExtra(DashboardConstant.CITY_LOCATION);
+                    inputFormFragment.handleFromLocationResult(autocompletePlaceResponseModel);
+                    break;
+
+                case DashboardConstant.REQUEST_CODE_TO_LOCATION:
+
+                    inputFormFragment = (InputFormFragment) getSupportFragmentManager().findFragmentByTag(TAG_INPUT_FRAGMENT);
+                    autocompletePlaceResponseModel = data.getParcelableExtra(DashboardConstant.CITY_LOCATION);
+                    inputFormFragment.handleToLocationResult(autocompletePlaceResponseModel);
+                    break;
+            }
+        }
+
+
+    }
+
+    @Override
+    public void handleFromLocation() {
+        Intent intent = new Intent(this, LocationSearchActivity.class);
+        startActivityForResult(intent, DashboardConstant.REQUEST_CODE_FROM_LOCATION);
+    }
+
+    @Override
+    public void handleToLocation() {
+        Intent intent = new Intent(this, LocationSearchActivity.class);
+        startActivityForResult(intent, DashboardConstant.REQUEST_CODE_TO_LOCATION);
+    }
+
+    @Override
+    public void navigateToLocationScreen(int requestCode) {
+
+        Intent intent = new Intent(this, LocationSearchActivity.class);
+        startActivityForResult(intent, requestCode);
+
+    }
+
+
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="VIEW" type="id"/>
+    <item name="CITY_ID" type="id" />
+    <item name="CITY_X_ID" type="id" />
+    <item name="POSITION" type="id" />
+</resources>

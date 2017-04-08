@@ -1,6 +1,8 @@
 package com.ixicode.constant.ixiplan.dashboard.contract;
 
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
+import com.ixicode.constant.ixiplan.common.model.MasterResponse;
+import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceRequestModel;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
 
 import java.util.ArrayList;
@@ -12,10 +14,6 @@ import java.util.ArrayList;
 public interface InputFormContract {
 
     interface View {
-
-        void onSuccessFetchAutoPlaces(ArrayList<AutocompletePlaceResponseModel> places);
-        void onFailureFetchAutoPlaces(ErrorDisplay errorDisplay);
-
         void onSubmitSuccess();
         void onSubmitFailure(ErrorDisplay errorDisplay);
 
@@ -23,7 +21,7 @@ public interface InputFormContract {
 
     interface Presenter {
 
-        void fetchAutoCompletePlaces(String placePartialName);
+        void fetchAutoCompletePlaces(AutocompletePlaceRequestModel autocompletePlaceRequestModel, int mode);
         void submit(String source, String destination);
 
     }

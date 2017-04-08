@@ -54,4 +54,11 @@ public interface AppConstant
 	 */
 	//GCM Implementation
 	String GCM_SENDER_ID_NUMBER =  "";
+
+	int REQUEST_CODE_FROM_LOCATION = 1001;
+	int REQUEST_CODE_TO_LOCATION = 1002;
+
+
+	String CITY_LOCATION = "city_location";
+
 }

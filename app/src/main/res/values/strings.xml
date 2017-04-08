@@ -7,4 +7,5 @@
     <string name="error_netwrok_error">Please check your network</string>
     <string name="error_tech_error">Seems there\'s an error at our end</string>
     <string name="dashboard_title">Dashboard</string>
+    <string name="title_activity_location_search">LocationSearchActivity</string>
 </resources>

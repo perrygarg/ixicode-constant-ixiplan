@@ -1,4 +1,4 @@
-package com.ixicode.constant.ixiplan.dashboard;
+package com.ixicode.constant.ixiplan.locationsearch;
 
 import android.content.Context;
 
@@ -8,28 +8,25 @@ import com.ixicode.constant.ixiplan.common.network.WebConstants;
 import com.ixicode.constant.ixiplan.common.network.WebManager;
 import com.ixicode.constant.ixiplan.common.network.WebService;
 import com.ixicode.constant.ixiplan.common.network.WebServiceListener;
-import com.ixicode.constant.ixiplan.dashboard.contract.InputFormContract;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceRequestModel;
-import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
-import com.ixicode.constant.ixiplan.dashboard.util.DashboardConstant;
 import com.ixicode.constant.ixiplan.dashboard.util.DashboardUtil;
 
 /**
  * Created by akash on 8/4/17.
  */
 
-public class InputFormPresenter implements WebServiceListener, InputFormContract.Presenter
-{
-    private Context context = null;
-    private InputFormContract.View view = null;
+public class LocationSearchPrensenter implements WebServiceListener, LocationSearchContract.Presenter {
 
-    public InputFormPresenter(Context context, InputFormContract.View view)
+    private LocationSearchContract.View view = null;
+    private  Context context = null;
+
+    public LocationSearchPrensenter(LocationSearchContract.View view, Context context)
     {
-        this.context = context;
         this.view = view;
+        this.context = context;
     }
 
-    private void getAutocompletePlaceName(AutocompletePlaceRequestModel autocompletePlaceRequestModel, int mode) {
+    private void getAutocompletePlaceName(AutocompletePlaceRequestModel autocompletePlaceRequestModel) {
 
         if(autocompletePlaceRequestModel != null)
         {
@@ -48,7 +45,6 @@ public class InputFormPresenter implements WebServiceListener, InputFormContract
     public void onServiceSuccess(MasterResponse[] masterResponse, int taskCode) {
 
         if(view != null) {
-
             view.onSuccessFetchAutoPlaces(masterResponse);
         }
 
@@ -65,14 +61,7 @@ public class InputFormPresenter implements WebServiceListener, InputFormContract
     }
 
     @Override
-    public void fetchAutoCompletePlaces(AutocompletePlaceRequestModel autocompletePlaceRequestModel, int mode) {
-        getAutocompletePlaceName(autocompletePlaceRequestModel, mode);
+    public void fetchAutoCompletePlaces(AutocompletePlaceRequestModel autocompletePlaceRequestModel) {
+        getAutocompletePlaceName(autocompletePlaceRequestModel);
     }
-
-    @Override
-    public void submit(String source, String destination) {
-
-    }
-
-
 }
