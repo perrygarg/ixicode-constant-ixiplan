@@ -5,10 +5,11 @@ import android.widget.FrameLayout;
 
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
+import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.dashboard.fragment.InputFormFragment;
 import com.ixicode.constant.ixiplan.dashboard.fragment.TrendingTripsFragment;
 
-public class DashboardActivity extends BaseActivity {
+public class DashboardActivity extends BaseActivity implements DashboardContract.View {
     FrameLayout inputFormContainer, trendingListContainer;
 
     @Override
@@ -30,6 +31,26 @@ public class DashboardActivity extends BaseActivity {
 
         TrendingTripsFragment trendingTripsFragment = new TrendingTripsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.trending_trips_fragment_holder, trendingTripsFragment).commit();
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void onSuccessFetchCurrentLocation(String location) {
+
+    }
+
+    @Override
+    public void onFailureFetchCurrentLocation(ErrorDisplay errorDisplay) {
 
     }
 }

@@ -8,13 +8,14 @@ import com.ixicode.constant.ixiplan.common.network.WebConstants;
 import com.ixicode.constant.ixiplan.common.network.WebManager;
 import com.ixicode.constant.ixiplan.common.network.WebService;
 import com.ixicode.constant.ixiplan.common.network.WebServiceListener;
+import com.ixicode.constant.ixiplan.dashboard.contract.InputFormContract;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceRequestModel;
 
 /**
  * Created by akash on 8/4/17.
  */
 
-public class InputFormPresenter implements WebServiceListener
+public class InputFormPresenter implements WebServiceListener, InputFormContract.Presenter
 {
     private Context context = null;
 
@@ -53,5 +54,15 @@ public class InputFormPresenter implements WebServiceListener
     @Override
     public void onValidationError(ValidationError[] validationError, int taskCode) {
         // TODO calbac  k to view.
+    }
+
+    @Override
+    public void fetchAutoCompletePlaces(String placePartialName) {
+
+    }
+
+    @Override
+    public void submit(String source, String destination) {
+
     }
 }

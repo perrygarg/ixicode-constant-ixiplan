@@ -7,4 +7,9 @@ package com.ixicode.constant.ixiplan.dashboard;
 public class DashboardPresenter implements DashboardContract.Presenter
 {
 
+    @Override
+    public void fetchCurrentLocation() {
+
+    }
+
 }

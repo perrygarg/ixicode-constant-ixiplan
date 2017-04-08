@@ -18,19 +18,11 @@ public interface DashboardContract {
         void onSuccessFetchCurrentLocation(String location);
         void onFailureFetchCurrentLocation(ErrorDisplay errorDisplay);
 
-        void onSuccessFetchAutoPlaces(ArrayList<String> places);
-        void onFailureFetchAutoPlaces(ErrorDisplay errorDisplay);
-
-        void onSubmitSuccess();
-        void onSubmitFailure(ErrorDisplay errorDisplay);
-
     }
 
     interface Presenter {
 
         void fetchCurrentLocation();
-        void fetchAutoCompletePlaces(String placePartialName);
-        void submit(String source, String destination);
 
     }
 
