@@ -15,7 +15,7 @@ import com.ixicode.constant.ixiplan.triplisting.presenter.ModeSelectorPresenter;
 
 import java.util.ArrayList;
 
-public class ModeSelectorActivity extends BaseActivity implements ModeSelectorContract.View{
+public class ModeSelectorActivity extends BaseActivity implements ModeSelectorContract.View, View.OnClickListener {
     private FloatingActionButton plane = null;
     private FloatingActionButton train = null;
     private FloatingActionButton car = null;
@@ -40,7 +40,10 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
         presenter = new ModeSelectorPresenter(this);
 
-        String[] citiesIds = getIntent().getStringArrayExtra(AppConstant.CITIES_IDS);
+//        String[] citiesIds = getIntent().getStringArrayExtra(AppConstant.CITIES_IDS);
+
+        String[] citiesIds = new String[] {"1065223", "1075798"};
+
         if(!AppUtil.isArrayEmpty(citiesIds)) {
 
         }
@@ -54,6 +57,13 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
         car = (FloatingActionButton) findViewById(R.id.car);
         fastest = (FloatingActionButton) findViewById(R.id.fastest);
         cheapest = (FloatingActionButton) findViewById(R.id.cheapest);
+
+        plane.setOnClickListener(this);
+        train.setOnClickListener(this);
+        bus.setOnClickListener(this);
+        car.setOnClickListener(this);
+        fastest.setOnClickListener(this);
+        cheapest.setOnClickListener(this);
     }
 
     private void hideFab(FloatingActionButton fab) {
@@ -82,6 +92,26 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
     @Override
     public void onSuccessFetchingModes(ArrayList<String> avlblModes) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.plane:
+                break;
+            case R.id.train:
+                break;
+            case R.id.bus:
+                break;
+            case R.id.car:
+                break;
+            case R.id.fastest:
+                break;
+            case R.id.cheapest:
+                break;
+        }
 
     }
 }
