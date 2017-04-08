@@ -46,12 +46,11 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
 
         fromAdapter = new AutocompletePlaceAdapter(getContext().getApplicationContext(), null);
         toAdapter = new AutocompletePlaceAdapter(getContext().getApplicationContext(), null);
-
     }
 
     @Override
     public void onSuccessFetchAutoPlaces(ArrayList<AutocompletePlaceResponseModel> places) {
-
+        toAdapter.setPlaceArraylist(places);
     }
 
     @Override
