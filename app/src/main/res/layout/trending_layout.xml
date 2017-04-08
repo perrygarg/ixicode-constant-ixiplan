@@ -14,4 +14,13 @@
         android:layout_gravity="center"
         android:src="@drawable/ixiplan_logo"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Trending Trips section \n   Coming Soon here!!!"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_size_xxlarge"/>
+
 </LinearLayout>

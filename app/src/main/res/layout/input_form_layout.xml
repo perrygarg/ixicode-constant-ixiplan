@@ -14,11 +14,34 @@
         android:text="Source Location:"
         android:textSize="@dimen/text_size_normal"/>
 
-    <AutoCompleteTextView
-        android:id="@+id/from_input"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"/>
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:id="@+id/from_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"/>
+
+        <ImageView
+            android:id="@+id/fetch_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignEnd="@id/from_input"
+            android:background="@drawable/gps_btn_selector"/>
+
+        <ProgressBar
+            android:id="@+id/from_progress"
+            android:layout_width="@dimen/progress_size"
+            android:layout_height="@dimen/progress_size"
+            android:layout_centerInParent="true"
+            android:layout_alignEnd="@id/from_input"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
 
     <requestFocus />
 
@@ -28,11 +51,25 @@
         android:text="Destination Location:"
         android:textSize="@dimen/text_size_normal"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <AutoCompleteTextView
         android:id="@+id/to_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"/>
+
+    <ProgressBar
+        android:id="@+id/to_progress"
+        android:layout_width="@dimen/progress_size"
+        android:layout_height="@dimen/progress_size"
+        android:layout_centerInParent="true"
+        android:layout_alignEnd="@id/to_input"
+        android:visibility="visible"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/submit_btn"
