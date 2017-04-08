@@ -6,9 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 
-/**
- * Created by jaswinder.singh on 8/28/2016.
- */
 public class BaseFragment extends android.support.v4.app.Fragment
 {
     @TargetApi(23)

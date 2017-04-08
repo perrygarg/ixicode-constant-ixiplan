@@ -1,11 +1,5 @@
 package com.ixicode.constant.ixiplan.common.network;
 
-/**
- * Web Service Constants
- * 
- * @author Jaswinder Singh
- *
- */
 public interface WebConstants
 {
 	/**
@@ -30,7 +24,7 @@ public interface WebConstants
 	/**
 	 * Web Service Task Codes
 	 */
-	int WS_CODE_LOGIN = 1;
+	int WS_CODE_AUTOCOMPLETE_PLACE = 1;
 	int WS_CODE_FORGOT_PASSWORD = 2;
 	int WS_CODE_RESET_PASSWORD = 3;
 	int WS_CODE_SEARCH_SUGGESTION = 4;
@@ -40,13 +34,9 @@ public interface WebConstants
 	 * Web Service URLs
 	 */
 	//String BASE_URL = ""; //Production Server
-	String BASE_URL = "http://labs.infoedge.com:9313/"; //Local Test Server
-	//String URL_LOGIN = BASE_URL + "v1/business/login";
-    String URL_LOGIN = BASE_URL + "v1/user/session";
-	String URL_FORGOT_PASSWORD = BASE_URL + "v1/business/forgotPassword";
-    String URL_RESET_PASSWORD = BASE_URL + "v1/business/resetPassword";
-	String URL_LISTING_SUGGESTOR = BASE_URL + "v1/business/listingSuggestor";
-	String URL_SEARCH_CLAIM_LIST = BASE_URL + "v1/business/searchListing";
+	String BASE_URL = "http://build2.ixigo.com/"; //Local Test Server
+    String AUTOCOMPLETE_PLACE_URL = BASE_URL + "action/content/zeus/autocomplete?searchFor=tpAutoComplete&neCategories=City&query=";
+
 
 
 }

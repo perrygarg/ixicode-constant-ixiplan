@@ -3,6 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- -->
+    <dimen name="autocomplete_textview_height">50dp</dimen>
+
+
     <!-- Text View / Edit Text -->
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_normal">15sp</dimen>

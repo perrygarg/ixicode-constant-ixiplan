@@ -7,10 +7,6 @@ import com.android.volley.Response;
 
 import java.util.Map;
 
-/**
- * Created by jaswinder.singh on 12/8/2016.
- */
-
 public class HttpClient
 {
     private Context context;

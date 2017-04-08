@@ -1,11 +1,5 @@
 package com.ixicode.constant.ixiplan.common.persistant;
 
-/**
- * Class for Placing Keys used in Shared-Prefernces
- * 
- * @author Jaswinder Singh
- *
- */
 public interface SharedPreferenceKeys
 {
 	/**

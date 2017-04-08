@@ -9,9 +9,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-/**
- * Created by jaswinder.singh on 9/4/2016.
- */
 public class MyVolley
 {
     private static MyVolley myVolley;

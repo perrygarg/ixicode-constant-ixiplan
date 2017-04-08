@@ -1,8 +1,5 @@
 package com.ixicode.constant.ixiplan.common.validation;
 
-/**
- * Created by jaswinder.singh on 11/20/2016.
- */
 
 public interface ValidationConstants
 {

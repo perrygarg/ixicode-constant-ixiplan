@@ -14,9 +14,6 @@ import com.ixicode.constant.ixiplan.common.util.MyLogs;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-/**
- * Created by jaswinder.singh on 9/4/2016.
- */
 public class GsonRequest<T, K> extends Request<T>
 {
     private final Gson gson = new Gson();

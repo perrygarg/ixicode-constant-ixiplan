@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class MyLogs
 {
-    public static String TAG = "pitzop_business";
+    public static String TAG = "ixiplan";
 
     private static final int STACK_TRACE_LEVELS_UP = 5;
 
