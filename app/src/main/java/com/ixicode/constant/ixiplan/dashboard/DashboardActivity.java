@@ -6,11 +6,14 @@ import android.widget.FrameLayout;
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
+import com.ixicode.constant.ixiplan.common.util.UIUtil;
+import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
 import com.ixicode.constant.ixiplan.dashboard.fragment.InputFormFragment;
 import com.ixicode.constant.ixiplan.dashboard.fragment.TrendingTripsFragment;
 
 public class DashboardActivity extends BaseActivity implements DashboardContract.View {
     FrameLayout inputFormContainer, trendingListContainer;
+    private CProgressHUD progressDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,14 @@ public class DashboardActivity extends BaseActivity implements DashboardContract
 
     @Override
     public void showProgress() {
-
+        if (this.progressDialog == null || !this.progressDialog.isShowing()) {
+            this.progressDialog = UIUtil.showCustomProgress(this);
+        }
     }
 
     @Override
     public void hideProgress() {
-
+        UIUtil.dismissCustomProgress(this.progressDialog);
     }
 
     @Override

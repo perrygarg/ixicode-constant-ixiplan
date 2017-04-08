@@ -12,4 +12,9 @@ public class ModeSelectorPresenter implements ModeSelectorContract.Presenter {
     public ModeSelectorPresenter(ModeSelectorContract.View view) {
         this.view = view;
     }
+
+    @Override
+    public void fetchModes(String srcXid, String desXid) {
+
+    }
 }

@@ -8,8 +8,12 @@ import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.util.AppUtil;
+import com.ixicode.constant.ixiplan.common.util.UIUtil;
+import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
 import com.ixicode.constant.ixiplan.triplisting.contract.ModeSelectorContract;
 import com.ixicode.constant.ixiplan.triplisting.presenter.ModeSelectorPresenter;
+
+import java.util.ArrayList;
 
 public class ModeSelectorActivity extends BaseActivity implements ModeSelectorContract.View{
     private FloatingActionButton plane = null;
@@ -20,6 +24,8 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
     private FloatingActionButton cheapest = null;
 
     private ModeSelectorPresenter presenter = null;
+
+    private CProgressHUD progressDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,4 +68,20 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
         }
     }
 
+    @Override
+    public void showProgress() {
+        if (this.progressDialog == null || !this.progressDialog.isShowing()) {
+            this.progressDialog = UIUtil.showCustomProgress(this);
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        UIUtil.dismissCustomProgress(this.progressDialog);
+    }
+
+    @Override
+    public void onSuccessFetchingModes(ArrayList<String> avlblModes) {
+
+    }
 }

@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
+
 
 public class UIUtil
 {
@@ -116,6 +118,31 @@ public class UIUtil
 	public static ProgressDialog showProgressDialog(Context context, String title, String message, boolean isInDeterminent, boolean isCancelable)
 	{
 		return (ProgressDialog.show(context, title, message, isInDeterminent, isCancelable));
+	}
+
+	/**
+	 * Shows Progress Bar Dialog
+	 *
+	 * @param activityContext
+	 * @return
+	 */
+	public static CProgressHUD showCustomProgress(Context activityContext) {
+		CProgressHUD dialog = null;
+
+		dialog = CProgressHUD.create(activityContext);
+		dialog.show();
+
+		return dialog;
+	}
+
+	public static void dismissCustomProgress(CProgressHUD dialog) {
+		try {
+			if (dialog != null) {
+				dialog.dismiss();
+			}
+		} catch (Exception exception) {
+			//Consume it
+		}
 	}
 
 	/**

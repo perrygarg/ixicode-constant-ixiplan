@@ -9,6 +9,15 @@
     android:padding="@dimen/view_padding"
     tools:context="com.ixicode.constant.ixiplan.triplisting.activities.ModeSelectorActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Available modes against your query"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
