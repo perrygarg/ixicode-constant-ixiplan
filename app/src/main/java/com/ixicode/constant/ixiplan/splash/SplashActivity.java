@@ -1,9 +1,12 @@
-package com.ixicode.constant.ixiplan;
+package com.ixicode.constant.ixiplan.splash;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SplashActivity extends AppCompatActivity {
+import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
+
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
