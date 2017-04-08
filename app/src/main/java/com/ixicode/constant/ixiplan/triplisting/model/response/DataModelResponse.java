@@ -17,6 +17,43 @@ public class DataModelResponse {
     @SerializedName("routes")
     public RoutesModelResponse[] routes;
 
+    @SerializedName("fastestRoute")
+    public FastestRouteResponse fastestRoute;
+
+    @SerializedName("cheapestRoute")
+    public CheapestRouteResponse cheapestRoute;
+
+    public class FastestRouteResponse {
+
+        @SerializedName("price")
+        public Integer price;
+
+        @SerializedName("time")
+        public Integer time;
+
+        @SerializedName("fastestDuration")
+        public Integer fastestDuration;
+
+        @SerializedName("modeViaString")
+        public String modeViaString;
+
+        @SerializedName("timeUnit")
+        public String timeUnit;
+
+        @SerializedName("timePretty")
+        public String timePretty;
+
+        @SerializedName("timePrettySuffix")
+        public String timePrettySuffix;
+
+        @SerializedName("durationPretty")
+        public String durationPretty;
+
+        @SerializedName("firstStep")
+        public FirstStepFastestModel firstStep;
+
+    }
+
     public class RoutesModelResponse {
 
         @SerializedName("price")
@@ -53,4 +90,34 @@ public class DataModelResponse {
         public FirstStepResponseModel firstStep;
     }
 
+    private class CheapestRouteResponse {
+
+        @SerializedName("price")
+        public Integer price;
+
+        @SerializedName("time")
+        public Integer time;
+
+        @SerializedName("fastestDuration")
+        public Integer fastestDuration;
+
+        @SerializedName("modeViaString")
+        public String modeViaString;
+
+        @SerializedName("timeUnit")
+        public String timeUnit;
+
+        @SerializedName("timePretty")
+        public String timePretty;
+
+        @SerializedName("timePrettySuffix")
+        public String timePrettySuffix;
+
+        @SerializedName("durationPretty")
+        public String durationPretty;
+
+        @SerializedName("firstStep")
+        public FirstStepCheapestModel firstStep;
+
+    }
 }

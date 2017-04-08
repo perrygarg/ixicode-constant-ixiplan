@@ -1,5 +1,7 @@
 package com.ixicode.constant.ixiplan.triplisting.contract;
 
+import com.ixicode.constant.ixiplan.triplisting.model.response.DataModelResponse;
+
 import java.util.ArrayList;
 
 /**
@@ -15,11 +17,15 @@ public interface ModeSelectorContract {
 
         void onSuccessFetchingModes(ArrayList<String> avlblModes);
 
+        void routeDetailsForRequestedMode(DataModelResponse.RoutesModelResponse route);
+
     }
 
     interface Presenter {
 
         void fetchModes(String srcXid, String desXid);
+
+        void onClickOnMode(String modeId);
 
     }
 

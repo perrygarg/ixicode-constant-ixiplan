@@ -11,6 +11,7 @@ import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.common.util.UIUtil;
 import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
 import com.ixicode.constant.ixiplan.triplisting.contract.ModeSelectorContract;
+import com.ixicode.constant.ixiplan.triplisting.model.response.DataModelResponse;
 import com.ixicode.constant.ixiplan.triplisting.presenter.ModeSelectorPresenter;
 
 import java.util.ArrayList;
@@ -95,37 +96,34 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
     @Override
     public void onSuccessFetchingModes(ArrayList<String> avlblModes) {
-if(avlblModes.contains("flight")) {
+        if(avlblModes.contains("flight")) {
+            plane.setTag("flight");
             showFab(plane);
         }
         if(avlblModes.contains("train")) {
+            train.setTag("train");
             showFab(train);
         }
         if(avlblModes.contains("bus")) {
+            bus.setTag("bus");
             showFab(bus);
         }
         if(avlblModes.contains("car")) {
+            car.setTag("car");
             showFab(car);
         }
+        fastest.setTag("fastest");
+        cheapest.setTag("cheapest");
+    }
+
+    @Override
+    public void routeDetailsForRequestedMode(DataModelResponse.RoutesModelResponse route) {
+
     }
 
     @Override
     public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.plane:
-                break;
-            case R.id.train:
-                break;
-            case R.id.bus:
-                break;
-            case R.id.car:
-                break;
-            case R.id.fastest:
-                break;
-            case R.id.cheapest:
-                break;
-        }
-
+        presenter.onClickOnMode((String) view.getTag());
     }
+
 }

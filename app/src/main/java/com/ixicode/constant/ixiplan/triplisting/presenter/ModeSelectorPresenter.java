@@ -11,6 +11,7 @@ import com.ixicode.constant.ixiplan.common.network.WebServiceListener;
 import com.ixicode.constant.ixiplan.common.util.MyLogs;
 import com.ixicode.constant.ixiplan.triplisting.contract.ModeSelectorContract;
 import com.ixicode.constant.ixiplan.triplisting.model.FetchModesBetweenLocsRequest;
+import com.ixicode.constant.ixiplan.triplisting.model.response.DataModelResponse;
 import com.ixicode.constant.ixiplan.triplisting.model.response.FetchModesBetweenLocsModel;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 public class ModeSelectorPresenter implements ModeSelectorContract.Presenter, WebServiceListener {
     private ModeSelectorContract.View view;
     private Context context;
+    FetchModesBetweenLocsModel model = null;
+    ArrayList<String> modes = null;
 
     public ModeSelectorPresenter(ModeSelectorContract.View view, Context context) {
         this.view = view;
@@ -39,6 +42,13 @@ public class ModeSelectorPresenter implements ModeSelectorContract.Presenter, We
     }
 
     @Override
+    public void onClickOnMode(String modeId) {
+        int index = modes.indexOf(modeId);
+        DataModelResponse.RoutesModelResponse route = model.data.routes[index];
+        view.routeDetailsForRequestedMode(route);
+    }
+
+    @Override
     public void onServiceBegin(int taskCode) {
         view.showProgress();
     }
@@ -48,7 +58,8 @@ public class ModeSelectorPresenter implements ModeSelectorContract.Presenter, We
         view.hideProgress();
 
         FetchModesBetweenLocsModel model = (FetchModesBetweenLocsModel) masterResponse[0];
-        ArrayList<String> modes = new ArrayList<>();
+        this.model = model;
+        modes = new ArrayList<>();
         int size = model.data.routes.length;
         for(int i = 0; i < size; i++) {
             modes.add(model.data.routes[i].allStepModes);

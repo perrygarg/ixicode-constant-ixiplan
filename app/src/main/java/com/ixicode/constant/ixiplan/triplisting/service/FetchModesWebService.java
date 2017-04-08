@@ -34,7 +34,7 @@ public class FetchModesWebService extends WebService{
         String url = String.format(Locale.US, WebConstants.FETCH_MODES_BETWEEN_PLACES_URL, requestModel.originCityId, requestModel.destinationCityId);
 
         HttpClient httpClient = new HttpClient(context);
-        httpClient.sendGSONRequest(Request.Method.GET, url, null, FetchModesBetweenLocsModel[].class, WebManager.getHeaders(), this, this, tag);
+        httpClient.sendGSONRequest(Request.Method.GET, url, null, FetchModesBetweenLocsModel.class, WebManager.getHeaders(), this, this, tag);
     }
 
     @Override

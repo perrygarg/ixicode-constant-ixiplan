@@ -33,7 +33,7 @@ public interface WebConstants
 	//String BASE_URL = ""; //Production Server
 	String BASE_URL = "http://build2.ixigo.com/"; //Local Test Server
     String AUTOCOMPLETE_PLACE_URL = BASE_URL + "action/content/zeus/autocomplete?searchFor=tpAutoComplete&neCategories=City&query=%1$s";
-	String FETCH_MODES_BETWEEN_PLACES_URL = BASE_URL + "api/v2/a2b/modes?apiKey=ixicode!2$&originCityId=%1$s&destinationCityId=%1$s";
+	String FETCH_MODES_BETWEEN_PLACES_URL = BASE_URL + "api/v2/a2b/modes?apiKey=ixicode!2$&originCityId=%1$s&destinationCityId=%2$s";
 
 
 
