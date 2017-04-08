@@ -17,13 +17,15 @@ import com.ixicode.constant.ixiplan.application.IxiPlanApp;
 import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseModel;
 
+import java.util.ArrayList;
+
 public class AutocompletePlaceAdapter extends ArrayAdapter<AutocompletePlaceResponseModel>
 {
     private LayoutInflater layoutInflater = null;
 
-    public AutocompletePlaceAdapter(@NonNull Context context, @LayoutRes int resource)
+    public AutocompletePlaceAdapter(@NonNull Context context, ArrayList<AutocompletePlaceResponseModel> arrayList)
     {
-        super(context, resource);
+        super(context, 0, 0, arrayList);
         Application ixiPlanApp = (Application) context;
         layoutInflater = (LayoutInflater) ixiPlanApp.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
