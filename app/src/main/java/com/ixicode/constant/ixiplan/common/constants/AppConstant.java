@@ -5,6 +5,8 @@ public interface AppConstant
 	int ERROR_TYPE_SIMPLE = 1;
 	int ERROR_TYPE_NO_NETWORK = 2;
 
+	String CITIES_IDS = "CITIES_IDS";
+
 	//App Store Url
 	String PLAYSTORE_HTTPS_URL = "https://play.google.com/store/apps/details?id=";
 	String PLAYSTORE_APP_URL = "market://details?id=";

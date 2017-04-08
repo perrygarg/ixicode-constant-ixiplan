@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_mode_selector"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="@dimen/view_padding"
+    tools:context="com.ixicode.constant.ixiplan.triplisting.activities.ModeSelectorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/plane"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_marginLeft="@dimen/fab_layout_margin"
+                android:layout_marginRight="@dimen/fab_layout_margin"
+                android:src="@drawable/ic_airplanemode_active_white_36dp"
+                app:borderWidth="@dimen/fab_border_width"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorPrimary" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/train"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_marginLeft="@dimen/fab_layout_margin"
+                android:layout_marginRight="@dimen/fab_layout_margin"
+                android:src="@drawable/ic_train_white_36dp"
+                app:borderWidth="@dimen/fab_border_width"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorPrimary" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/bus"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_marginLeft="@dimen/fab_layout_margin"
+                android:layout_marginRight="@dimen/fab_layout_margin"
+                android:src="@drawable/ic_directions_bus_white_36dp"
+                app:borderWidth="@dimen/fab_border_width"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorPrimary" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/car"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_marginLeft="@dimen/fab_layout_margin"
+                android:layout_marginRight="@dimen/fab_layout_margin"
+                android:src="@drawable/ic_directions_car_white_36dp"
+                app:borderWidth="@dimen/fab_border_width"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:layout_margin="@dimen/separator_margin"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:weightSum="2">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fastest"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_marginLeft="@dimen/fab_layout_margin"
+                android:layout_marginRight="@dimen/fab_layout_margin"
+                android:layout_weight="1"
+                android:src="@drawable/ic_access_time_white_36dp"
+                app:borderWidth="@dimen/fab_border_width"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorPrimary" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/cheapest"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_marginLeft="@dimen/fab_layout_margin"
+                android:layout_marginRight="@dimen/fab_layout_margin"
+                android:layout_weight="1"
+                android:src="@drawable/ic_money_off_white_36dp"
+                app:borderWidth="@dimen/fab_border_width"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
