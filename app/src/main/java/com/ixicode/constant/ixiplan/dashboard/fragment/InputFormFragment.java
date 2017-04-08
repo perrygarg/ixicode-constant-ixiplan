@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.ProgressBar;
 
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.fragment.BaseFragment;
@@ -24,6 +25,9 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
 
     AutocompletePlaceAdapter fromAdapter = null;
     AutocompletePlaceAdapter toAdapter = null;
+
+    ProgressBar fromBar = null;
+    ProgressBar toBar = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +48,26 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
         AutoCompleteTextView fromInput = (AutoCompleteTextView) view.findViewById(R.id.from_input);
         AutoCompleteTextView toInput = (AutoCompleteTextView) view.findViewById(R.id.to_input);
 
+        fromBar = (ProgressBar) view.findViewById(R.id.from_progress);
+        toBar = (ProgressBar) view.findViewById(R.id.to_progress);
+
+        hideProgressBar(fromBar);
+        hideProgressBar(toBar);
+
         fromAdapter = new AutocompletePlaceAdapter(getContext().getApplicationContext(), null);
         toAdapter = new AutocompletePlaceAdapter(getContext().getApplicationContext(), null);
+    }
+
+    private void hideProgressBar(ProgressBar bar) {
+        if(bar != null) {
+            bar.setVisibility(View.GONE);
+        }
+    }
+
+    private void showProgressBar(ProgressBar bar) {
+        if(bar != null) {
+            bar.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
