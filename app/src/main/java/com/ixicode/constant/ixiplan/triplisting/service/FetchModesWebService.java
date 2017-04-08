@@ -4,14 +4,15 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.ixicode.constant.ixiplan.R;
-import com.ixicode.constant.ixiplan.common.constants.AppConstant;import com.ixicode.constant.ixiplan.common.network.WebConstants;
+import com.ixicode.constant.ixiplan.common.constants.AppConstant;
+import com.ixicode.constant.ixiplan.common.network.WebConstants;
 import com.ixicode.constant.ixiplan.common.network.WebManager;
 import com.ixicode.constant.ixiplan.common.network.WebService;
 import com.ixicode.constant.ixiplan.common.network.WebServiceListener;
 import com.ixicode.constant.ixiplan.common.network.volley.HttpClient;
-import com.ixicode.constant.ixiplan.triplisting.model.FetchModesBetweenLocsModel;
 import com.ixicode.constant.ixiplan.triplisting.model.FetchModesBetweenLocsRequest;
 import com.ixicode.constant.ixiplan.triplisting.model.response.FetchModesBetweenLocsModel;
+
 import java.util.Locale;
 
 /**

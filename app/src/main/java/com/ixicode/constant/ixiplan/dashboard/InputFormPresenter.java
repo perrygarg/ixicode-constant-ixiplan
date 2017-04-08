@@ -49,7 +49,6 @@ public class InputFormPresenter implements WebServiceListener, InputFormContract
 
         if(view != null) {
 
-            view.onSuccessFetchAutoPlaces(masterResponse);
         }
 
     }
