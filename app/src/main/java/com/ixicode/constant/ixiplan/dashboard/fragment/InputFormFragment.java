@@ -44,10 +44,10 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
         AutoCompleteTextView fromInput = (AutoCompleteTextView) view.findViewById(R.id.from_input);
         AutoCompleteTextView toInput = (AutoCompleteTextView) view.findViewById(R.id.to_input);
 
-        fromAdapter = new AutocompletePlaceAdapter(getContext(), 0);
-        toAdapter = new AutocompletePlaceAdapter(getContext(), 0);
+        fromAdapter = new AutocompletePlaceAdapter(getContext().getApplicationContext(), 0);
+        toAdapter = new AutocompletePlaceAdapter(getContext().getApplicationContext(), 0);
 
-        
+
     }
 
     @Override

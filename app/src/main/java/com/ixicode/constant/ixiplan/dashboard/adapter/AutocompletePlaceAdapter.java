@@ -1,5 +1,6 @@
 package com.ixicode.constant.ixiplan.dashboard.adapter;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -23,7 +24,7 @@ public class AutocompletePlaceAdapter extends ArrayAdapter<AutocompletePlaceResp
     public AutocompletePlaceAdapter(@NonNull Context context, @LayoutRes int resource)
     {
         super(context, resource);
-        IxiPlanApp ixiPlanApp = (IxiPlanApp) context;
+        Application ixiPlanApp = (Application) context;
         layoutInflater = (LayoutInflater) ixiPlanApp.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
