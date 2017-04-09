@@ -1,6 +1,7 @@
 package com.ixicode.constant.ixiplan.PlaceExplore;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -87,6 +88,7 @@ public class PlaceExploreAdapter extends BaseRecyclerAdapter
         NetworkImageView networkImageView = null;
         TextView textViewName = null;
         TextView textViewAddress = null;
+        CardView cardView = null;
 
 
         public PlaceExploreItemViewHolder(View itemView)
@@ -95,7 +97,8 @@ public class PlaceExploreAdapter extends BaseRecyclerAdapter
             networkImageView = (NetworkImageView) itemView.findViewById(R.id.networkImageview);
             textViewName= (TextView) itemView.findViewById(R.id.textViewName);
             textViewAddress= (TextView) itemView.findViewById(R.id.textViewAddress);
-            itemView.setTag(R.id.POSITION, getAdapterPosition());
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
+
             itemView.setOnClickListener(handleClickListener);
         }
 
@@ -138,6 +141,7 @@ public class PlaceExploreAdapter extends BaseRecyclerAdapter
 
         PlaceExploreItemViewHolder placeExploreItemViewHolder = (PlaceExploreItemViewHolder) holder;
         PlaceExploreResponseModel.PlaceData placeExploreResponseModel = arrayList.get(position);
+        placeExploreItemViewHolder.cardView.setTag(R.id.POSITION, position);
 
         placeExploreItemViewHolder.networkImageView.setImageUrl(placeExploreResponseModel.imageUrl, MyVolley.getInstance(context).getImageLoader());
         placeExploreItemViewHolder.textViewName.setText(AppUtil.setStringNotNull(placeExploreResponseModel.name));

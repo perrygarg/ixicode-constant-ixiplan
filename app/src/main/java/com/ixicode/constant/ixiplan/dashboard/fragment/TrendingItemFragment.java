@@ -57,4 +57,9 @@ public class TrendingItemFragment extends Fragment
         }
 
     }
+
+    public interface OnFragClickListener
+    {
+        void onItemClick();
+    }
 }

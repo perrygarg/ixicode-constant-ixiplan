@@ -87,6 +87,7 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
 
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add(placeExploreRequestModel.cityId);
+        arrayList.add(placeExploreRequestModel.cityId);
 
         intent.putExtra(AppConstant.CITIES_IDS, arrayList);
         intent.putExtra(AppConstant.COMING_FROM, AppConstant.COMING_FROM_PLACE_EXPLORE);

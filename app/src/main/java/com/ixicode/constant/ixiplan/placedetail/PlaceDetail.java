@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.ixicode.constant.ixiplan.PlaceExplore.PlaceExplore;
 import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
@@ -22,11 +24,12 @@ import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseMode
 
 import java.util.ArrayList;
 
-public class PlaceDetail extends AppCompatActivity implements PlaceDetailContract.View {
+public class PlaceDetail extends BaseActivity implements PlaceDetailContract.View {
 
     private PlaceDetailView placeDetailView = null;
     private PlaceDetailPresenter presenter = null;
     ArrayList<String> ids = null;
+    boolean isBottomShown = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
