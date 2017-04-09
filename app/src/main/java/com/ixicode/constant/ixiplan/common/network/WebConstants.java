@@ -27,16 +27,19 @@ public interface WebConstants
 	int WS_CODE_AUTOCOMPLETE_PLACE = 1;
 	int WS_CODE_FETCH_MODES_BW_PLACES = 2;
 	int WS_CODE_FETCH_MODES_TRENDING_PLACES = 3;
+	int WS_CODE_FETCH_MODES_PLACE_DETAIL = 4;
+	int WS_CODE_FETCH_MODES_PLACE_EXPLORE = 5;
 
 	/**
 	 * Web Service URLs
 	 */
 	//String BASE_URL = ""; //Production Server
 	String BASE_URL = "http://build2.ixigo.com/"; //Local Test Server
-    String AUTOCOMPLETE_PLACE_URL = BASE_URL + "action/content/zeus/autocomplete?searchFor=tpAutoComplete&neCategories=City&query=%1$s";
+	String AUTOCOMPLETE_PLACE_URL = BASE_URL + "action/content/zeus/autocomplete?searchFor=tpAutoComplete&neCategories=City&query=%1$s";
 	String FETCH_MODES_BETWEEN_PLACES_URL = BASE_URL + "api/v2/a2b/modes?apiKey=ixicode!2$&originCityId=%1$s&destinationCityId=%2$s";
 
 	String TRENDING_PLACES_API = BASE_URL + "api/v2/widgets/brand/inspire?product=1&apiKey=ixicode!2$";
-
+	String GET_PLACE_DETAIL = BASE_URL + "api/v3/namedentities/id/%1$s?apiKey=ixicode!2$";
+	String GET_PLACE_EXPLORE = BASE_URL + "api/v3/namedentities/city/%1$s/categories?apiKey=ixicode!2$&type=%2$s&skip=%3$s&limit=%4$s";
 
 }

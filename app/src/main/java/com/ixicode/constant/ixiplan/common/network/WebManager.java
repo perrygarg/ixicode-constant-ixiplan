@@ -2,9 +2,11 @@ package com.ixicode.constant.ixiplan.common.network;
 
 import android.content.Context;
 
+import com.ixicode.constant.ixiplan.PlaceExplore.PlaceExploreService;
 import com.ixicode.constant.ixiplan.common.network.volley.HttpClient;
 import com.ixicode.constant.ixiplan.dashboard.GetTrendingLocationService;
 import com.ixicode.constant.ixiplan.dashboard.PlaceAutocompleteService;
+import com.ixicode.constant.ixiplan.placedetail.PlaceDetailService;
 import com.ixicode.constant.ixiplan.triplisting.service.FetchModesWebService;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +29,10 @@ public class WebManager
                 return new FetchModesWebService(taskCode, serviceListener, context);
             case WebConstants.WS_CODE_FETCH_MODES_TRENDING_PLACES:
                 return new GetTrendingLocationService(taskCode, serviceListener, context);
+            case WebConstants.WS_CODE_FETCH_MODES_PLACE_DETAIL:
+                return new PlaceDetailService(taskCode, serviceListener, context);
+            case WebConstants.WS_CODE_FETCH_MODES_PLACE_EXPLORE:
+                return new PlaceExploreService(taskCode, serviceListener, context);
 
         }
 

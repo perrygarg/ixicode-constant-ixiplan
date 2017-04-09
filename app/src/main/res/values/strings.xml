@@ -23,5 +23,7 @@
     <!--Permission Handling Dialog -->
     <string name="msg_permission_location_rationale">We need Location Permission to Find your current location</string>
     <string name="msg_permission_location_denied">You have denied location permission, Please enable to auto detect your current location</string>
+    <string name="title_activity_place_detail">PlaceDetail</string>
+    <string name="title_activity_place_explore">PlaceExplore</string>
     <string name="options_for_chosen_mode">Options for chosen mode</string>
 </resources>

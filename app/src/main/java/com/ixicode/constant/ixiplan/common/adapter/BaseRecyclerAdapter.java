@@ -3,7 +3,12 @@ package com.ixicode.constant.ixiplan.common.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
+import com.ixicode.constant.ixiplan.R;
 
 public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
@@ -12,7 +17,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 
     private int total = 0;
     private int count = 0;
-    private boolean isLoadMore = true;
+    protected boolean isLoadMore = true;
     private boolean isPagination = true;
 
     private final int ITEM_PROGRESS_SHOWN = 100;
@@ -35,9 +40,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         switch (viewType) {
             case ITEM_PROGRESS_SHOWN:
 
-//                View view = layoutInflater.inflate(R.layout.progress_dialog_layout, parent, false);
-//                viewHolder = new ViewHolderProgressItem(view);
-//                view.setVisibility(View.GONE);
+                View view = layoutInflater.inflate(R.layout.progress_layout, parent, false);
+                viewHolder = new ViewHolderProgressItem(view);
+                view.setVisibility(View.GONE);
 
                 break;
         }
@@ -53,51 +58,49 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         switch (viewType)
         {
             case ITEM_PROGRESS_SHOWN:
-//                displayProgress(holder, position);
+                displayProgress(holder, position);
                 break;
         }
 
     }
 
-//    private void displayProgress(RecyclerView.ViewHolder holder, int position)
-//    {
-////        if(isLoadMore) {
-//            if (count < total) {
-//
-//                ViewHolderProgressItem viewHolderProgressItem = (ViewHolderProgressItem) holder;
-//
-//                if (position < total)
-//                {
-//                    if(isLoadMore) {
-//                        Animation myRotation = AnimationUtils.loadAnimation(PitzopBusinessApp.appContext, R.anim.progress_anim);
-//                        viewHolderProgressItem.imageViewNeedle.startAnimation(myRotation);
-//                        viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.VISIBLE);
-//
-//                        if (baseRecyclerAdapterListener != null) {
-//                            baseRecyclerAdapterListener.loadMore();
-//                        }
-//                    }
-//                    else
-//                    {
-//                        viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.INVISIBLE);
-//
-//                        if (baseRecyclerAdapterListener != null) {
-//                            baseRecyclerAdapterListener.handleError();
-//                        }
-//                    }
-//                }
-//                else
-//                {
-//                    viewHolderProgressItem.imageViewNeedle.clearAnimation();
-//                    viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.INVISIBLE);
-//                }
-//            }
-////        }
-////        else
-////        {
-////            displayError();
-////        }
-//    }
+    private void displayProgress(RecyclerView.ViewHolder holder, int position)
+    {
+        if(isLoadMore) {
+        if (count < total) {
+
+            ViewHolderProgressItem viewHolderProgressItem = (ViewHolderProgressItem) holder;
+
+            if (position < total)
+            {
+                if(isLoadMore) {
+
+                    viewHolderProgressItem.linearLayoutParent.setVisibility(View.VISIBLE);
+
+                    if (baseRecyclerAdapterListener != null) {
+                        baseRecyclerAdapterListener.loadMore();
+                    }
+                }
+                else
+                {
+                    viewHolderProgressItem.linearLayoutParent.setVisibility(View.INVISIBLE);
+
+                    if (baseRecyclerAdapterListener != null) {
+                        baseRecyclerAdapterListener.handleError();
+                    }
+                }
+            }
+            else
+            {
+                viewHolderProgressItem.linearLayoutParent.setVisibility(View.INVISIBLE);
+            }
+        }
+        }
+//        else
+//        {
+//            displayError();
+//        }
+    }
 
 //    private void displayError()
 //    {
@@ -107,21 +110,21 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 //        }
 //    }
 
-//    private static class ViewHolderProgressItem extends RecyclerView.ViewHolder
-//    {
-//        RelativeLayout relativeLayoutBottom = null;
-//        ImageView imageViewMeter = null;
-//        ImageView imageViewNeedle = null;
-//
-//        public ViewHolderProgressItem(View itemView)
-//        {
-//            super(itemView);
-//
-//            imageViewMeter = (ImageView) itemView.findViewById(R.id.imageViewMeter);
-//            relativeLayoutBottom = (RelativeLayout) itemView.findViewById(R.id.relativeLayoutBottom);
-//            imageViewNeedle = (ImageView) itemView.findViewById(R.id.imageViewNeedle);
-//        }
-//    }
+    private static class ViewHolderProgressItem extends RecyclerView.ViewHolder
+    {
+        LinearLayout linearLayoutParent = null;
+        ProgressBar progressBar = null;
+
+
+        public ViewHolderProgressItem(View itemView)
+        {
+            super(itemView);
+
+            linearLayoutParent = (LinearLayout) itemView;
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
+
+        }
+    }
 
     @Override
     public int getItemCount()
