@@ -25,17 +25,19 @@
         >
 
         <TextView
+            android:id="@+id/places_to_visit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Places To Visit"
+            android:text="@string/places_to_visit"
             android:layout_weight="1"
             android:gravity="center"
             />
 
         <TextView
+            android:id="@+id/things_to_do"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Todo"
+            android:text="@string/things_to_do"
             android:layout_weight="1"
             android:gravity="center"
             />

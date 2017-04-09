@@ -57,7 +57,7 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
     private EditText toInput = null;
     private ImageView imageViewCurrentLoc = null;
     private Button submitBtn = null;
-    public String fromId, toId;
+    public String fromId, toId, fromCityId, toCityId;
 
 
     @Override
@@ -117,19 +117,32 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
 
                     break;
                 case R.id.submit_btn:
-                    navigateToNextScreen();
+                    if(validateInputs()) {
+                        navigateToNextScreen();
+                    } else {
+                        UIUtil.makeAlert(getActivity(), getString(R.string.pls_fill_fields), getString(R.string.dashboard), getString(R.string.ok));
+                    }
                     break;
             }
 
         }
     }
 
+    private boolean validateInputs() {
+        return !AppUtil.isStringEmpty(fromInput.getText().toString()) && !AppUtil.isStringEmpty(toInput.getText().toString());
+    }
+
     public void navigateToNextScreen() {
+        ArrayList<String> cityXids = new ArrayList<>();
+        cityXids.add(fromId);
+        cityXids.add(toId);
+
         ArrayList<String> cityIds = new ArrayList<>();
-        cityIds.add(fromId);
-        cityIds.add(toId);
+        cityIds.add(fromCityId);
+        cityIds.add(toCityId);
 
         Intent intent = new Intent(getActivity(), ModeSelectorActivity.class);
+        intent.putStringArrayListExtra(AppConstant.CITIES_XIDS, cityXids);
         intent.putStringArrayListExtra(AppConstant.CITIES_IDS, cityIds);
         startActivity(intent);
     }
@@ -157,12 +170,14 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
 
         toInput.setText(AppUtil.setStringNotNull(response.cityName));
         toId = response.xId;
+        toCityId = response.cityId;
     }
 
     public void handleFromLocationResult(AutocompletePlaceResponseModel response)
     {
         fromInput.setText(AppUtil.setStringNotNull(response.cityName));
         fromId = response.xId;
+        fromCityId = response.cityId;
     }
 
 

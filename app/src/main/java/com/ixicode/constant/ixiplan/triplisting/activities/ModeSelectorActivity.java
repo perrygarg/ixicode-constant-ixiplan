@@ -8,7 +8,6 @@ import android.view.View;
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
-import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.common.util.UIUtil;
 import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
 import com.ixicode.constant.ixiplan.triplisting.contract.ModeSelectorContract;
@@ -29,6 +28,9 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
     private CProgressHUD progressDialog = null;
 
+    ArrayList<String> xids = null;
+    private ArrayList<String> ids = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +44,14 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
         presenter = new ModeSelectorPresenter(this, getApplicationContext());
 
-        ArrayList<String> ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
+        xids = getIntent().getStringArrayListExtra(AppConstant.CITIES_XIDS);
+
+        ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
 
 //        String[] citiesIds = new String[] {"1065223", "1075798"};
 
-        if(ids != null && ids.size() == 2) {
-            doFetchModes(ids);
+        if(xids != null && xids.size() == 2) {
+            doFetchModes(xids);
         }
         
     }
@@ -121,6 +125,8 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
     public void routeDetailsForRequestedMode(DataModelResponse.RoutesModelResponse route) {
         Intent intent = new Intent(ModeSelectorActivity.this, ModesListingActivity.class);
         intent.putExtra(AppConstant.ROUTE_MODEL_SERIALIZED,route);
+        intent.putStringArrayListExtra(AppConstant.CITIES_XIDS, xids);
+        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
         startActivity(intent);
     }
 
@@ -128,6 +134,8 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
     public void routeDetailsForRequestedMode(DataModelResponse.FastestRouteResponse routeResponse) {
         Intent intent = new Intent(ModeSelectorActivity.this, ModesListingActivity.class);
         intent.putExtra(AppConstant.FASTEST_MODEL_SERIALIZED,routeResponse);
+        intent.putStringArrayListExtra(AppConstant.IDS_INFO, xids);
+        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
         startActivity(intent);
     }
 
@@ -135,6 +143,8 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
     public void routeDetailsForRequestedMode(DataModelResponse.CheapestRouteResponse routeResponse) {
         Intent intent = new Intent(ModeSelectorActivity.this, ModesListingActivity.class);
         intent.putExtra(AppConstant.CHEAPEST_MODEL_SERIALIZED,routeResponse);
+        intent.putStringArrayListExtra(AppConstant.IDS_INFO, xids);
+        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
         startActivity(intent);
     }
 

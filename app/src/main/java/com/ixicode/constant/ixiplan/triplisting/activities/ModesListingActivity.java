@@ -1,5 +1,6 @@
 package com.ixicode.constant.ixiplan.triplisting.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,8 @@ public class ModesListingActivity extends BaseActivity implements ModesListingCo
     RouteModelAdapter routeModelAdapter = null;
     FastestRouteAdapter fastestRouteAdapter = null;
     CheapestRouteAdapter cheapestRouteAdapter = null;
+    ArrayList<String> xids = null;
+    ArrayList<String> ids = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,9 @@ public class ModesListingActivity extends BaseActivity implements ModesListingCo
     }
 
     private void getDataFromIntent() {
+        xids = getIntent().getStringArrayListExtra(AppConstant.CITIES_XIDS);
+        ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
+
         DataModelResponse.RoutesModelResponse modelResponse = (DataModelResponse.RoutesModelResponse) getIntent().getSerializableExtra(AppConstant.ROUTE_MODEL_SERIALIZED);
         DataModelResponse.FastestRouteResponse fastestRoute = (DataModelResponse.FastestRouteResponse) getIntent().getSerializableExtra(AppConstant.FASTEST_MODEL_SERIALIZED);
         DataModelResponse.CheapestRouteResponse cheapestRoute = (DataModelResponse.CheapestRouteResponse) getIntent().getSerializableExtra(AppConstant.CHEAPEST_MODEL_SERIALIZED);
@@ -177,7 +183,7 @@ public class ModesListingActivity extends BaseActivity implements ModesListingCo
     }
 
     private void gotoNextScreen() {
-        //launch activity
+        startActivity(new Intent(ModesListingActivity.this, BookingConfirmationActivity.class).putStringArrayListExtra(AppConstant.CITIES_XIDS, xids).putStringArrayListExtra(AppConstant.CITIES_IDS, ids));
     }
 
 }

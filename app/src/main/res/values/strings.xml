@@ -27,4 +27,12 @@
     <string name="title_activity_place_explore">PlaceExplore</string>
     <string name="options_for_chosen_mode">Options for chosen mode</string>
     <string name="let_s_plan">Let\'s plan</string>
+    <string name="cheapest">Cheapest</string>
+    <string name="fastest">Fastest</string>
+    <string name="booking_confirmed">BOOKING CONFIRMED!!!</string>
+    <string name="pls_fill_fields">Please fill fields</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="ok">Ok</string>
+    <string name="things_to_do">Things To Do</string>
+    <string name="places_to_visit">Places To Visit</string>
 </resources>

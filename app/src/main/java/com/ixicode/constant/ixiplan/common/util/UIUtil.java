@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.application.IxiPlanApp;
 import com.ixicode.constant.ixiplan.common.fragment.ConfirmationDialogFragment;
 import com.ixicode.constant.ixiplan.common.util.customprogress.CProgressHUD;
 
@@ -48,6 +50,66 @@ public class UIUtil
 
 		InputMethodManager inputMethodManager = (InputMethodManager)editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+	}
+
+	public static void makeAlert(Context ctx, String message, String title, String positive) {
+		DialogInterface.OnClickListener onClickListner = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		};
+
+		makeAlert(ctx, message, title, positive, null, onClickListner);
+
+	}
+
+	public static void makeAlertAndFinishActivity(Context ctx, String message, String title, String positive, final Activity activity) {
+		DialogInterface.OnClickListener onClickListner = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				activity.finish();
+			}
+		};
+
+		makeAlert(ctx, message, title, positive, null, onClickListner);
+
+	}
+
+	public static void makeAlertAndStartActivity(final Context ctx, String message, String title, String positive, final Activity srcActivity, final Class desActivity) {
+		DialogInterface.OnClickListener onClickListner = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				ctx.startActivity(new Intent(srcActivity, desActivity));
+			}
+		};
+
+		makeAlert(ctx, message, title, positive, null, onClickListner);
+
+	}
+
+	public static void makeAlert(Context ctx, String message, String title, String positive, DialogInterface.OnClickListener onClickListner) {
+		makeAlert(ctx, message, title, positive, null, onClickListner);
+	}
+
+	public static void makeAlert(Context ctx, String message, String title, String positive, String negative, DialogInterface.OnClickListener onClickListener) {
+		android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(ctx, R.style.AppTheme_DialogStyle);
+		alertDialogBuilder.setTitle(title);
+		alertDialogBuilder.setMessage(message);
+		alertDialogBuilder.setPositiveButton(positive, onClickListener);
+		if (negative != null) {
+			alertDialogBuilder.setNegativeButton(negative, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+		}
+		android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+
 	}
 
 	//Hide Soft Keyboard

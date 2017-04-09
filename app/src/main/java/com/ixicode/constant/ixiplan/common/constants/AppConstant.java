@@ -7,6 +7,7 @@ public interface AppConstant
 	int ERROR_TYPE_SIMPLE = 1;
 	int ERROR_TYPE_NO_NETWORK = 2;
 
+	String CITIES_XIDS = "CITIES_XIDS";
 	String CITIES_IDS = "CITIES_IDS";
 
 	//App Store Url
@@ -71,8 +72,11 @@ public interface AppConstant
 	String CHEAPEST_MODEL_SERIALIZED = "CHEAPEST_MODEL_SERIALIZED";
 	String FASTEST_MODEL_SERIALIZED = "FASTEST_MODEL_SERIALIZED";
 
+	String IDS_INFO = "IDS_INFO";
+
 	int FLIGHT = 0;
 	int TRAIN = 1;
 	int CAR = 2;
 	int BUS = 3;
+	String TAG_CITY = "TAG_CITY";
 }

@@ -1,5 +1,6 @@
 package com.ixicode.constant.ixiplan.placedetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,17 +11,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.ixicode.constant.ixiplan.PlaceExplore.PlaceExplore;
 import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
 import com.ixicode.constant.ixiplan.common.network.volley.MyVolley;
 import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseModel;
 
-public class PlaceDetail extends AppCompatActivity  implements PlaceDetailContract.View{
+import java.util.ArrayList;
+
+public class PlaceDetail extends AppCompatActivity implements PlaceDetailContract.View {
 
     private PlaceDetailView placeDetailView = null;
     private PlaceDetailPresenter presenter = null;
+    ArrayList<String> ids = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +35,11 @@ public class PlaceDetail extends AppCompatActivity  implements PlaceDetailContra
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
+
         placeDetailView = new PlaceDetailView();
         presenter = new PlaceDetailPresenter(this, getApplicationContext());
-        presenter.getPlaceDetail("503b2a92e4b032e338f13fd5");
+        presenter.getPlaceDetail(ids.get(1));
 
     }
 
@@ -53,17 +61,16 @@ public class PlaceDetail extends AppCompatActivity  implements PlaceDetailContra
 
     }
 
-    public String getName(String str[])
-    {
+    public String getName(String str[]) {
         int len = str.length;
 
         StringBuilder stringBuilder = new StringBuilder("");
 
-        for(int i  = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
 
             stringBuilder.append(str[i]);
 
-            if(i < (len - 1))
+            if (i < (len - 1))
                 stringBuilder.append(",");
 
         }
@@ -76,21 +83,49 @@ public class PlaceDetail extends AppCompatActivity  implements PlaceDetailContra
 
     }
 
-    private class PlaceDetailView
-    {
+    private class PlaceDetailView {
         NetworkImageView networkImageview = null;
         TextView textViewName = null;
         TextView textViewDesc = null;
         TextView textViewWhyVisit = null;
+        TextView placesToGo = null;
+        TextView thingsToDo = null;
 
-        public PlaceDetailView()
-        {
+        public PlaceDetailView() {
             networkImageview = (NetworkImageView) findViewById(R.id.networkImageview);
             textViewName = (TextView) findViewById(R.id.textViewName);
             textViewDesc = (TextView) findViewById(R.id.textViewDesc);
             textViewWhyVisit = (TextView) findViewById(R.id.textViewWhyVisit);
+            placesToGo = (TextView) findViewById(R.id.places_to_visit);
+            thingsToDo = (TextView) findViewById(R.id.things_to_do);
         }
 
+
     }
+
+    private class handleClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            int viewId = view.getId();
+
+            Intent intent = new Intent(PlaceDetail.this, PlaceExplore.class);
+            switch (viewId) {
+                case R.id.places_to_visit:
+
+                    String str = "Places To Visit";
+                    intent.putExtra(AppConstant.TAG_CITY, str);
+                    intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
+                    break;
+
+                case R.id.things_to_do:
+                    intent.putExtra(AppConstant.TAG_CITY, "Things To Do");
+                    intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
+                    break;
+            }
+
+            startActivity(intent);
+        }
+    }
+
 
 }

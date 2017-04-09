@@ -10,6 +10,7 @@ import com.ixicode.constant.ixiplan.PlaceExplore.model.PlaceExploreRequestModel;
 import com.ixicode.constant.ixiplan.PlaceExplore.model.PlaceExploreResponseModel;
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.adapter.BaseRecyclerAdapterListener;
+import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
 import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseModel;
@@ -38,8 +39,8 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
         recyclerView.setAdapter(placeExploreAdapter);
 
         placeExploreRequestModel= new PlaceExploreRequestModel();
-        placeExploreRequestModel.cityId = "503b2acde4b032e338f1cd9f";
-        placeExploreRequestModel.type = "Places To Visit";
+        placeExploreRequestModel.cityId = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS).get(1);
+        placeExploreRequestModel.type = getIntent().getStringExtra(AppConstant.TAG_CITY);
         presenter.getPlaceList(placeExploreRequestModel);
     }
 

@@ -16,17 +16,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".splash.SplashActivity"
-            android:theme="@style/AppThemeFullscreen" >
+            android:theme="@style/AppThemeFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".dashboard.DashboardActivity" >
-
-        </activity>
+        <activity android:name=".dashboard.DashboardActivity"></activity>
         <activity
             android:name=".locationsearch.LocationSearchActivity"
             android:label="@string/title_activity_location_search"
@@ -42,9 +39,8 @@
         <activity
             android:name=".PlaceExplore.PlaceExplore"
             android:label="@string/title_activity_place_explore"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".triplisting.activities.BookingConfirmationActivity"></activity>
     </application>
 
 </manifest>
