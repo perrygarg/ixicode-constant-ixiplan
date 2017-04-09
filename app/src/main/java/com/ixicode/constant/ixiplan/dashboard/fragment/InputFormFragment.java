@@ -57,7 +57,7 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
     private EditText toInput = null;
     private ImageView imageViewCurrentLoc = null;
     private Button submitBtn = null;
-    private String fromId, toId;
+    public String fromId, toId;
 
 
     @Override
@@ -124,7 +124,7 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
         }
     }
 
-    private void navigateToNextScreen() {
+    public void navigateToNextScreen() {
         ArrayList<String> cityIds = new ArrayList<>();
         cityIds.add(fromId);
         cityIds.add(toId);

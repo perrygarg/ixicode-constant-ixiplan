@@ -1,6 +1,7 @@
 package com.ixicode.constant.ixiplan.dashboard;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.FrameLayout;
@@ -9,6 +10,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
+import com.ixicode.constant.ixiplan.common.fragment.ConfirmationDialogFragment;
 import com.ixicode.constant.ixiplan.common.location.GeoCodingHelper;
 import com.ixicode.constant.ixiplan.common.location.GeoLocation;
 import com.ixicode.constant.ixiplan.common.location.GoogleLocationHandler;
@@ -26,6 +28,11 @@ import com.ixicode.constant.ixiplan.permissionhandling.PermissionConstants;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionManager;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionRationaleDialogListener;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionRequestModel;
+import com.ixicode.constant.ixiplan.smsreader.HandleSmsRead;
+import com.ixicode.constant.ixiplan.smsreader.Sms;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DashboardActivity extends BaseActivity
         implements DashboardContract.View, InputFormFragment.InputFormListener {
@@ -34,12 +41,14 @@ public class DashboardActivity extends BaseActivity
 
     private final String TAG_INPUT_FRAGMENT = "TAG_INPUT_FRAGMENT";
     private final String TAG_TRENDING_FRAGMENT = "TAG_TRENDING_FRAGMENT";
+    private final String ITEM = "item";
 
     private GeoLocation tempSelectedLocation; //Location Visibile on Action Bar
     private GoogleLocationHandler locationHandler;
     private Handler handler = new Handler();
     private LocationTimeOutRunnable locationTimeOutRunnable;
     private RefreshLocationRunnable runnable;
+    private CProgressHUD dialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +70,7 @@ public class DashboardActivity extends BaseActivity
         TrendingTripsFragment trendingTripsFragment = new TrendingTripsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.trending_trips_fragment_holder, trendingTripsFragment, TAG_TRENDING_FRAGMENT).commit();
 
+        new HandleReadSms().execute();
     }
 
     @Override
@@ -345,7 +355,7 @@ public class DashboardActivity extends BaseActivity
 
 //    private void setLocationTimeout()
 //    {
-//        //Log.d(Constants.LOG_TAG, "Home - setLocationTimeout()");
+//
 //
 //        locationTimeOutRunnable = new LocationTimeOutRunnable();
 //        handler.postDelayed(locationTimeOutRunnable, AppConstant.TIME_CURRENT_LOCATION_TIMEOUT);
@@ -367,6 +377,71 @@ public class DashboardActivity extends BaseActivity
             }
         }
     }
+
+    private class HandleReadSms extends AsyncTask<Void, Void, ArrayList<Sms>>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            dialog = UIUtil.showCustomProgress(DashboardActivity.this);
+
+        }
+
+        @Override
+        protected ArrayList<Sms> doInBackground(Void... params) {
+
+            HandleSmsRead handleSmsRead = new HandleSmsRead();
+            return handleSmsRead.getSms(DashboardActivity.this.getApplicationContext());
+
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Sms> arrayList) {
+            super.onPostExecute(arrayList);
+
+            UIUtil.dismissCustomProgress(dialog);
+
+            if(!AppUtil.isCollectionEmpty(arrayList))
+            {
+                Sms sms = arrayList.get(0);
+                String title = "Ticket Booked?";
+                String msg = "From : " + sms.from.name + "   To : " + sms.to.name;
+                String positiveButtonText = "Yes";
+                String negativeButtonText = "No";
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(ITEM, arrayList.get(0));
+
+                ConfirmationDialogFragment fragment = ConfirmationDialogFragment.getInstance(new HandleConfirmListener(), hashMap, title, msg, positiveButtonText, negativeButtonText, true);
+                fragment.show(DashboardActivity.this.getSupportFragmentManager(), "");
+            }
+        }
+    }
+
+    private class HandleConfirmListener implements ConfirmationDialogFragment.ConfirmationDialogListener
+    {
+
+        @Override
+        public void onDialogButtonClick(HashMap<String, Object> data, boolean isActionConfirmed) {
+
+            if(isActionConfirmed)
+            {
+                Sms sms = (Sms) data.get(ITEM);
+
+                InputFormFragment inputFormFragment = (InputFormFragment) getSupportFragmentManager().findFragmentByTag(TAG_INPUT_FRAGMENT);
+                inputFormFragment.fromId = sms.from.code;
+                inputFormFragment.toId = sms.to.code;
+                inputFormFragment.navigateToNextScreen();
+
+            }
+            else
+            {
+
+            }
+
+        }
+    }
+
 
 
 }

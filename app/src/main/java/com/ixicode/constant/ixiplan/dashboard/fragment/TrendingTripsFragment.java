@@ -30,6 +30,7 @@ public class TrendingTripsFragment extends BaseFragment implements TrendingPlace
     private TrendingPlacesContract.Presenter presenter = null;
     private TrendingLocationResponse trendingLocationResponse = null;
     private HandleViewPageAdapter handleViewPageAdapter = null;
+    private ViewPager viewPager = null;
 
 
     @Override
@@ -48,7 +49,7 @@ public class TrendingTripsFragment extends BaseFragment implements TrendingPlace
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         presenter = new TrendingPlacesPresenter(this, getContext().getApplicationContext());
         handleViewPageAdapter = new HandleViewPageAdapter(getChildFragmentManager(), null);
         viewPager.setAdapter(handleViewPageAdapter);
@@ -139,12 +140,18 @@ public class TrendingTripsFragment extends BaseFragment implements TrendingPlace
             {
                 case R.id.textViewAll:
 
-                    handleViewPageAdapter.setFlight(TrendingTripsFragment.this.trendingLocationResponse.data.flight);
+//                    handleViewPageAdapter.setFlight();
+
+                    handleViewPageAdapter = new HandleViewPageAdapter(getChildFragmentManager(), TrendingTripsFragment.this.trendingLocationResponse.data.flight);
+                    viewPager.setAdapter(handleViewPageAdapter);
 
                     break;
 
-                case R.id.textViewPrice:
-                    handleViewPageAdapter.setFlight(TrendingTripsFragment.this.trendingLocationResponse.data.budgetFlight);
+                case R.id.textViewbudget:
+//                    handleViewPageAdapter.setFlight();
+
+                    handleViewPageAdapter = new HandleViewPageAdapter(getChildFragmentManager(), TrendingTripsFragment.this.trendingLocationResponse.data.budgetFlight);
+                    viewPager.setAdapter(handleViewPageAdapter);
                     break;
             }
 

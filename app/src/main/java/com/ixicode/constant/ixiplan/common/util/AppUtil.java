@@ -384,6 +384,18 @@ public class AppUtil
 		}
 	}
 
+	public static Long getCursorLong(Cursor cursor, String name)
+	{
+		if(isCursorEmpty(cursor))
+		{
+			return 0L;
+		}
+		else
+		{
+			return cursor.getLong(cursor.getColumnIndex(name));
+		}
+	}
+
 	public static float getCursorFloat(Cursor cursor, String name)
 	{
 		if(isCursorEmpty(cursor))

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -94,4 +95,12 @@ public class ConfirmationDialogFragment extends DialogFragment
 
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+		((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+	}
+
 }

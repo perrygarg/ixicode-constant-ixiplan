@@ -18,6 +18,7 @@ public class TrendingLocationResponse extends MasterResponse
         @SerializedName("flight")
         public Flight flight[] = null;
 
+        @SerializedName("budget_flight")
         public Flight budgetFlight[] = null;
     }
 

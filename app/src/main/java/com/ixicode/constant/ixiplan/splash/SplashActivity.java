@@ -1,6 +1,8 @@
 package com.ixicode.constant.ixiplan.splash;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -38,4 +40,5 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         startActivity(new Intent(SplashActivity.this, DashboardActivity.class));
         finish();
     }
+
 }
