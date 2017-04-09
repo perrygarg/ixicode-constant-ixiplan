@@ -406,7 +406,7 @@ public class DashboardActivity extends BaseActivity
             {
                 Sms sms = arrayList.get(0);
                 String title = "Ticket already booked?";
-                String msg = "I have detected that you have a ticket booked via IRCTC From : " + sms.from.name + "   To : " + sms.to.name + ". Do you want me to take you to" + sms.to.name +" ?";
+                String msg = "I have detected that you have a ticket booked via IRCTC From : " + sms.from.name + "   To : " + sms.to.name + ". Do you want me to take you to " + sms.to.name +" ?";
                 String positiveButtonText = "Yes";
                 String negativeButtonText = "No";
                 HashMap<String, Object> hashMap = new HashMap<>();

@@ -26,10 +26,11 @@ import java.util.ArrayList;
 
 public class PlaceDetail extends BaseActivity implements PlaceDetailContract.View {
 
+    public boolean isBottomShown = true;
     private PlaceDetailView placeDetailView = null;
     private PlaceDetailPresenter presenter = null;
     ArrayList<String> ids = null;
-    boolean isBottomShown = true;
+    String toId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class PlaceDetail extends BaseActivity implements PlaceDetailContract.Vie
         setupToolbar(getString(R.string.abt_des), true);
 
         ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
-        String toId = getIntent().getStringExtra("CITY_ID");
+        toId = getIntent().getStringExtra("CITY_ID");
 
         if(AppConstant.COMING_FROM_PLACE_EXPLORE == getIntent().getIntExtra(AppConstant.COMING_FROM, 0))
             isBottomShown = false;
@@ -135,12 +136,27 @@ public class PlaceDetail extends BaseActivity implements PlaceDetailContract.Vie
 
                     String str = "Places To Visit";
                     intent.putExtra(AppConstant.TAG_CITY, str);
-                    intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
+
+                    if(toId == null) {
+                        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
+                    } else {
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add("");
+                        list.add(toId);
+                        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, list);
+                    }
                     break;
 
                 case R.id.things_to_do:
                     intent.putExtra(AppConstant.TAG_CITY, "Things To Do");
-                    intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
+                    if(toId == null) {
+                        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, ids);
+                    } else {
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add("");
+                        list.add(toId);
+                        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, list);
+                    }
                     break;
             }
 

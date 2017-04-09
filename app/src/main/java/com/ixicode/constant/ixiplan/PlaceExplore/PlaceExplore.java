@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.ixicode.constant.ixiplan.PlaceExplore.model.PlaceExploreRequestModel;
 import com.ixicode.constant.ixiplan.PlaceExplore.model.PlaceExploreResponseModel;
 import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.adapter.BaseRecyclerAdapterListener;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
@@ -19,7 +20,7 @@ import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseMode
 
 import java.util.ArrayList;
 
-public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapterListener, PlaceExploreContract.View, PlaceExploreAdapter.OnPlaceClickListener {
+public class PlaceExplore extends BaseActivity implements BaseRecyclerAdapterListener, PlaceExploreContract.View, PlaceExploreAdapter.OnPlaceClickListener {
 
     private PlaceExploreContract.Presenter presenter = null;
     private PlaceExploreRequestModel placeExploreRequestModel = null;
@@ -29,8 +30,7 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_explore);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar("Explore", true);
 
         presenter = new PlaceExplorePresenter(this, getApplicationContext());
 
@@ -65,7 +65,6 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
     @Override
     public void onSuccessPlaceExplore(MasterResponse[] getPlaceDetailResponseModel, int taskCode)
     {
-
         placeExploreAdapter.addData(getPlaceData(getPlaceDetailResponseModel));
     }
 
@@ -77,7 +76,12 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
     private PlaceExploreResponseModel.PlaceData[] getPlaceData(MasterResponse[] getPlaceDetailResponseModel)
     {
         PlaceExploreResponseModel[] getPlaceDetailResponseModels = (PlaceExploreResponseModel[]) getPlaceDetailResponseModel;
-        return getPlaceDetailResponseModels[0].data.visit;
+        if(placeExploreRequestModel.type.equals("Things To Do")) {
+            return getPlaceDetailResponseModels[0].data.things;
+        } else {
+            return getPlaceDetailResponseModels[0].data.visit;
+        }
+
     }
 
     @Override
