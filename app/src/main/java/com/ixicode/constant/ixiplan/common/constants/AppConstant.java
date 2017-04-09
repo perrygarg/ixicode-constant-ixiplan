@@ -9,6 +9,9 @@ public interface AppConstant
 
 	String CITIES_XIDS = "CITIES_XIDS";
 	String CITIES_IDS = "CITIES_IDS";
+	String COMING_FROM = "COMING_FROM";
+
+	int COMING_FROM_PLACE_EXPLORE = 1000;
 
 	//App Store Url
 	String PLAYSTORE_HTTPS_URL = "https://play.google.com/store/apps/details?id=";

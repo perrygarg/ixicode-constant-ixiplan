@@ -31,17 +31,21 @@ public class PlaceExploreAdapter extends BaseRecyclerAdapter
     private LayoutInflater layoutInflater = null;
     private List<PlaceExploreResponseModel.PlaceData> arrayList = null;
     private Context context = null;
+    private OnPlaceClickListener onPlaceClickListener = null;
+    private HandleClickListener handleClickListener = null;
 
     protected PlaceExploreAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener,
-                                  boolean isPagination, Context context, List<PlaceExploreResponseModel.PlaceData> arrayList) {
+                                  boolean isPagination, Context context, List<PlaceExploreResponseModel.PlaceData> arrayList, OnPlaceClickListener onPlaceClickListener) {
         super(baseRecyclerAdapterListener, isPagination, context);
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.arrayList = arrayList;
+        this.onPlaceClickListener = onPlaceClickListener;
 
         if(arrayList == null)
             this.arrayList = new ArrayList<>();
 
         this.context = context;
+        handleClickListener = new HandleClickListener();
     }
 
     @Override
@@ -91,6 +95,24 @@ public class PlaceExploreAdapter extends BaseRecyclerAdapter
             networkImageView = (NetworkImageView) itemView.findViewById(R.id.networkImageview);
             textViewName= (TextView) itemView.findViewById(R.id.textViewName);
             textViewAddress= (TextView) itemView.findViewById(R.id.textViewAddress);
+            itemView.setTag(R.id.POSITION, getAdapterPosition());
+            itemView.setOnClickListener(handleClickListener);
+        }
+
+
+    }
+
+    private class HandleClickListener implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v) {
+
+
+            if(onPlaceClickListener != null)
+            {
+                int pos = (int) v.getTag(R.id.POSITION);
+                onPlaceClickListener.onItemClick(arrayList.get(pos));
+            }
         }
     }
 
@@ -135,5 +157,10 @@ public class PlaceExploreAdapter extends BaseRecyclerAdapter
             this.arrayList.addAll(arrayList);
             notifyDataSetChanged();
         }
+    }
+
+    public interface OnPlaceClickListener
+    {
+        void onItemClick(PlaceExploreResponseModel.PlaceData placeExploreResponseModel);
     }
 }

@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ixicode.constant.ixiplan.PlaceExplore.PlaceExplore;
 import com.ixicode.constant.ixiplan.R;
-import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
@@ -23,7 +22,7 @@ import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseMode
 
 import java.util.ArrayList;
 
-public class PlaceDetail extends BaseActivity implements PlaceDetailContract.View {
+public class PlaceDetail extends AppCompatActivity implements PlaceDetailContract.View {
 
     private PlaceDetailView placeDetailView = null;
     private PlaceDetailPresenter presenter = null;
@@ -37,6 +36,9 @@ public class PlaceDetail extends BaseActivity implements PlaceDetailContract.Vie
 
         ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
         String toId = getIntent().getStringExtra("CITY_ID");
+
+        if(AppConstant.COMING_FROM_PLACE_EXPLORE == getIntent().getIntExtra(AppConstant.COMING_FROM, 0))
+            isBottomShown = false;
 
         placeDetailView = new PlaceDetailView();
         presenter = new PlaceDetailPresenter(this, getApplicationContext());
@@ -95,6 +97,7 @@ public class PlaceDetail extends BaseActivity implements PlaceDetailContract.Vie
         TextView textViewWhyVisit = null;
         TextView placesToGo = null;
         TextView thingsToDo = null;
+        LinearLayout linearLayoutBelow = null;
 
         public PlaceDetailView() {
             networkImageview = (NetworkImageView) findViewById(R.id.networkImageview);
@@ -103,12 +106,22 @@ public class PlaceDetail extends BaseActivity implements PlaceDetailContract.Vie
             textViewWhyVisit = (TextView) findViewById(R.id.textViewWhyVisit);
             placesToGo = (TextView) findViewById(R.id.places_to_visit);
             thingsToDo = (TextView) findViewById(R.id.things_to_do);
+            linearLayoutBelow = (LinearLayout)findViewById(R.id.linearLayoutBelow);
+
+            HandleClickListener handleClickListener = new HandleClickListener();
+            placesToGo.setOnClickListener(handleClickListener);
+            thingsToDo.setOnClickListener(handleClickListener);
+
+            if(isBottomShown)
+                linearLayoutBelow.setVisibility(View.VISIBLE);
+            else
+                linearLayoutBelow.setVisibility(View.GONE);
         }
 
 
     }
 
-    private class handleClickListener implements View.OnClickListener {
+    private class HandleClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             int viewId = view.getId();

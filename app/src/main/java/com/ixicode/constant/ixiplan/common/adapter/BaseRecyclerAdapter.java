@@ -138,7 +138,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public int getItemViewType(int position) {
 
-        if((position + 1) == count && isPagination)
+        if((position) == count && isPagination)
         {
             return ITEM_PROGRESS_SHOWN;
         }

@@ -1,5 +1,6 @@
 package com.ixicode.constant.ixiplan.PlaceExplore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +14,12 @@ import com.ixicode.constant.ixiplan.common.adapter.BaseRecyclerAdapterListener;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
+import com.ixicode.constant.ixiplan.placedetail.PlaceDetail;
 import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseModel;
 
-public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapterListener, PlaceExploreContract.View {
+import java.util.ArrayList;
+
+public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapterListener, PlaceExploreContract.View, PlaceExploreAdapter.OnPlaceClickListener {
 
     private PlaceExploreContract.Presenter presenter = null;
     private PlaceExploreRequestModel placeExploreRequestModel = null;
@@ -32,7 +36,7 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        placeExploreAdapter = new PlaceExploreAdapter(this, true, getApplicationContext(), null);
+        placeExploreAdapter = new PlaceExploreAdapter(this, true, getApplicationContext(), null, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.hasFixedSize();
@@ -74,5 +78,19 @@ public class PlaceExplore extends AppCompatActivity implements BaseRecyclerAdapt
     {
         PlaceExploreResponseModel[] getPlaceDetailResponseModels = (PlaceExploreResponseModel[]) getPlaceDetailResponseModel;
         return getPlaceDetailResponseModels[0].data.visit;
+    }
+
+    @Override
+    public void onItemClick(PlaceExploreResponseModel.PlaceData placeExploreResponseModel) {
+
+        Intent intent = new Intent(this, PlaceDetail.class);
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(placeExploreRequestModel.cityId);
+
+        intent.putExtra(AppConstant.CITIES_IDS, arrayList);
+        intent.putExtra(AppConstant.COMING_FROM, AppConstant.COMING_FROM_PLACE_EXPLORE);
+        startActivity(intent);
+
     }
 }
