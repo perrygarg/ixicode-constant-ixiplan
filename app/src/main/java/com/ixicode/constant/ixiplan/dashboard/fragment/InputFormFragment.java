@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ import com.ixicode.constant.ixiplan.locationsearch.LocationSearchActivity;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionConstants;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionManager;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionRequestModel;
+import com.ixicode.constant.ixiplan.triplisting.activities.ModeSelectorActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +56,8 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
     private EditText fromInput = null;
     private EditText toInput = null;
     private ImageView imageViewCurrentLoc = null;
+    private Button submitBtn = null;
+    private String fromId, toId;
 
 
     @Override
@@ -78,15 +82,12 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
         fromInput = (EditText) view.findViewById(R.id.from_input);
         toInput = (EditText) view.findViewById(R.id.to_input);
         imageViewCurrentLoc = (ImageView) view.findViewById(R.id.imageViewCurrentLoc);
+        submitBtn = (Button) view.findViewById(R.id.submit_btn);
 
-
-//        fromInput.addTextChangedListener(new HandleTextChangeListener(DashboardConstant.FROM_AUTOCOMPLETE));
-//        toInput.addTextChangedListener(new HandleTextChangeListener(DashboardConstant.TO_AUTOCOMPLETE));
-
-//        fromInput.setOnItemSelectedListener(new HandleItemSelectedListener());
         HandlePlaceClickListener handlePlaceClickListener = new HandlePlaceClickListener();
         fromInput.setOnClickListener(handlePlaceClickListener);
         toInput.setOnClickListener(handlePlaceClickListener);
+        submitBtn.setOnClickListener(handlePlaceClickListener);
     }
 
     private class HandlePlaceClickListener implements View.OnClickListener
@@ -115,9 +116,22 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
                 case R.id.imageViewCurrentLoc:
 
                     break;
+                case R.id.submit_btn:
+                    navigateToNextScreen();
+                    break;
             }
 
         }
+    }
+
+    private void navigateToNextScreen() {
+        ArrayList<String> cityIds = new ArrayList<>();
+        cityIds.add(fromId);
+        cityIds.add(toId);
+
+        Intent intent = new Intent(getActivity(), ModeSelectorActivity.class);
+        intent.putStringArrayListExtra(AppConstant.CITIES_IDS, cityIds);
+        startActivity(intent);
     }
 
     @Override
@@ -142,11 +156,13 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
     {
 
         toInput.setText(AppUtil.setStringNotNull(response.cityName));
+        toId = response.xId;
     }
 
     public void handleFromLocationResult(AutocompletePlaceResponseModel response)
     {
         fromInput.setText(AppUtil.setStringNotNull(response.cityName));
+        fromId = response.xId;
     }
 
 

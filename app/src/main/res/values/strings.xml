@@ -26,4 +26,5 @@
     <string name="title_activity_place_detail">PlaceDetail</string>
     <string name="title_activity_place_explore">PlaceExplore</string>
     <string name="options_for_chosen_mode">Options for chosen mode</string>
+    <string name="let_s_plan">Let\'s plan</string>
 </resources>

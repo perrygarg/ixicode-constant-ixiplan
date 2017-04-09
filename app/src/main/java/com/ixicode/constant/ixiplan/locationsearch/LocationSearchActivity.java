@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.adapter.BaseRecyclerAdapterListener;
 import com.ixicode.constant.ixiplan.common.listners.OnItemClickListener;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
@@ -25,7 +26,7 @@ import com.ixicode.constant.ixiplan.dashboard.model.AutocompletePlaceResponseMod
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LocationSearchActivity extends AppCompatActivity implements LocationSearchContract.View {
+public class LocationSearchActivity extends BaseActivity implements LocationSearchContract.View {
 
     private RecyclerView recyclerView = null;
     private EditText editTextSearch = null;
@@ -38,8 +39,7 @@ public class LocationSearchActivity extends AppCompatActivity implements Locatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_search);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar("Type Location", true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

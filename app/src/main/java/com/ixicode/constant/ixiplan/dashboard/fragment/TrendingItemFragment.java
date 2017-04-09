@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.ixicode.constant.ixiplan.R;
 import com.ixicode.constant.ixiplan.common.network.WebManager;
 import com.ixicode.constant.ixiplan.common.network.volley.MyVolley;
+import com.ixicode.constant.ixiplan.common.util.AppUtil;
 import com.ixicode.constant.ixiplan.dashboard.model.TrendingLocationResponse;
 
 /**
@@ -49,9 +50,11 @@ public class TrendingItemFragment extends Fragment
         TextView textViewName = (TextView) view.findViewById(R.id.textViewName);
         TextView textViewPrice = (TextView) view.findViewById(R.id.textViewPrice);
 
-        imageViewBack.setImageUrl(flight.image, MyVolley.getInstance(getContext()).getImageLoader());
-        textViewName.setText(flight.cityName);
-        textViewPrice.setText(flight.price);
+        if(flight != null) {
+            imageViewBack.setImageUrl(AppUtil.setStringNotNull(flight.image), MyVolley.getInstance(getContext()).getImageLoader());
+            textViewName.setText(flight.cityName);
+            textViewPrice.setText("INR " + flight.price);
+        }
 
     }
 }

@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    android:paddingTop="@dimen/activity_vertical_margin">
 
-    
     <LinearLayout
         android:id="@+id/linearLayoutBelow"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textViewAll"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="All"
             android:gravity="center"
-            android:textSize="16sp"
-            />
+            android:text="All"
+            style="@style/buttonTheme"
+            android:textSize="16sp" />
+
+        <View android:layout_height="match_parent"
+            android:layout_width="1dp"
+            android:background="@color/white" />
 
         <TextView
             android:id="@+id/textViewbudget"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="budget"
+            style="@style/buttonTheme"
             android:gravity="center"
-            android:textSize="16sp"
-            />
-        
+            android:text="budget"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/linearLayoutBelow"
-        >
-    </android.support.v4.view.ViewPager>
+        android:padding="4dp"
+        android:layout_above="@id/linearLayoutBelow"></android.support.v4.view.ViewPager>
 
-    
 
 </RelativeLayout>

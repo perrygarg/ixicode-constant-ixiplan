@@ -42,18 +42,18 @@ public class ModeSelectorActivity extends BaseActivity implements ModeSelectorCo
 
         presenter = new ModeSelectorPresenter(this, getApplicationContext());
 
-//        String[] citiesIds = getIntent().getStringArrayExtra(AppConstant.CITIES_IDS);
+        ArrayList<String> ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
 
-        String[] citiesIds = new String[] {"1065223", "1075798"};
+//        String[] citiesIds = new String[] {"1065223", "1075798"};
 
-        if(!AppUtil.isArrayEmpty(citiesIds)) {
-            doFetchModes(citiesIds);
+        if(ids != null && ids.size() == 2) {
+            doFetchModes(ids);
         }
         
     }
 
-    private void doFetchModes(String[] citiesIds) {
-        presenter.fetchModes(citiesIds[0], citiesIds[1]);    }
+    private void doFetchModes(ArrayList<String> citiesIds) {
+        presenter.fetchModes(citiesIds.get(0), citiesIds.get(1));    }
 
     private void findViewsById() {
         plane = (FloatingActionButton) findViewById(R.id.plane);
