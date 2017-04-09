@@ -35,4 +35,5 @@
     <string name="ok">Ok</string>
     <string name="things_to_do">Things To Do</string>
     <string name="places_to_visit">Places To Visit</string>
+    <string name="abt_des">About Your Destination</string>
 </resources>

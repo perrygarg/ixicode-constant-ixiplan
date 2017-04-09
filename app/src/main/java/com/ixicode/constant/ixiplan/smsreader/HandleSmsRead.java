@@ -129,6 +129,7 @@ public class HandleSmsRead
 
     private Place getStationXId(String code)
     {
+        //Mocking data as of now as no API available for converting "CDG" to Ixigo city ID, but SMS is being read in real time.
         Place place = new Place();
 
         switch (code)
@@ -136,11 +137,13 @@ public class HandleSmsRead
             case "CDG":
                 place.code = "1075379";
                 place.name = "Chandigarh";
+                place.id = "503b2a8fe4b032e338f13897";
             return place;
 
             default:
                 place.code = "1065223";
                 place.name = "New Delhi";
+                place.id = "503b2a70e4b032e338f0ee67";
                 return place;
         }
 

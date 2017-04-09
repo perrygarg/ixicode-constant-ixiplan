@@ -9,4 +9,6 @@ public class Place
     public String code = null;
 
     public String name = null;
+
+    public String id = null;
 }

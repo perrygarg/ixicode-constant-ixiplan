@@ -405,8 +405,8 @@ public class DashboardActivity extends BaseActivity
             if(!AppUtil.isCollectionEmpty(arrayList))
             {
                 Sms sms = arrayList.get(0);
-                String title = "Ticket Booked?";
-                String msg = "From : " + sms.from.name + "   To : " + sms.to.name;
+                String title = "Ticket already booked?";
+                String msg = "I have detected that you have a ticket booked via IRCTC From : " + sms.from.name + "   To : " + sms.to.name + ". Do you want me to take you to" + sms.to.name +" ?";
                 String positiveButtonText = "Yes";
                 String negativeButtonText = "No";
                 HashMap<String, Object> hashMap = new HashMap<>();
@@ -431,7 +431,7 @@ public class DashboardActivity extends BaseActivity
                 InputFormFragment inputFormFragment = (InputFormFragment) getSupportFragmentManager().findFragmentByTag(TAG_INPUT_FRAGMENT);
                 inputFormFragment.fromId = sms.from.code;
                 inputFormFragment.toId = sms.to.code;
-                inputFormFragment.navigateToNextScreen();
+                inputFormFragment.goToNextDynamicScreen(sms.to.id);
 
             }
             else

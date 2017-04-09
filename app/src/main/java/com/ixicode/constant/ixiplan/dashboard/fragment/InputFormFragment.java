@@ -38,6 +38,7 @@ import com.ixicode.constant.ixiplan.locationsearch.LocationSearchActivity;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionConstants;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionManager;
 import com.ixicode.constant.ixiplan.permissionhandling.PermissionRequestModel;
+import com.ixicode.constant.ixiplan.placedetail.PlaceDetail;
 import com.ixicode.constant.ixiplan.triplisting.activities.ModeSelectorActivity;
 
 import java.util.ArrayList;
@@ -88,6 +89,10 @@ public class InputFormFragment extends BaseFragment implements InputFormContract
         fromInput.setOnClickListener(handlePlaceClickListener);
         toInput.setOnClickListener(handlePlaceClickListener);
         submitBtn.setOnClickListener(handlePlaceClickListener);
+    }
+
+    public void goToNextDynamicScreen(String id) {
+        startActivity(new Intent(getActivity(), PlaceDetail.class).putExtra("CITY_ID", id));
     }
 
     private class HandlePlaceClickListener implements View.OnClickListener

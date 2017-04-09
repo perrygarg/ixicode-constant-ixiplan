@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ixicode.constant.ixiplan.PlaceExplore.PlaceExplore;
 import com.ixicode.constant.ixiplan.R;
+import com.ixicode.constant.ixiplan.common.activity.BaseActivity;
 import com.ixicode.constant.ixiplan.common.constants.AppConstant;
 import com.ixicode.constant.ixiplan.common.model.ErrorDisplay;
 import com.ixicode.constant.ixiplan.common.model.MasterResponse;
@@ -22,7 +23,7 @@ import com.ixicode.constant.ixiplan.placedetail.model.GetPlaceDetailResponseMode
 
 import java.util.ArrayList;
 
-public class PlaceDetail extends AppCompatActivity implements PlaceDetailContract.View {
+public class PlaceDetail extends BaseActivity implements PlaceDetailContract.View {
 
     private PlaceDetailView placeDetailView = null;
     private PlaceDetailPresenter presenter = null;
@@ -32,14 +33,18 @@ public class PlaceDetail extends AppCompatActivity implements PlaceDetailContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar(getString(R.string.abt_des), true);
 
         ids = getIntent().getStringArrayListExtra(AppConstant.CITIES_IDS);
+        String toId = getIntent().getStringExtra("CITY_ID");
 
         placeDetailView = new PlaceDetailView();
         presenter = new PlaceDetailPresenter(this, getApplicationContext());
-        presenter.getPlaceDetail(ids.get(1));
+        if(toId == null) {
+            presenter.getPlaceDetail(ids.get(1));
+        } else {
+            presenter.getPlaceDetail(toId);
+        }
 
     }
 
