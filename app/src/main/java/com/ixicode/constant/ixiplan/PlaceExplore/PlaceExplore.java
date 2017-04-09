@@ -90,8 +90,8 @@ public class PlaceExplore extends BaseActivity implements BaseRecyclerAdapterLis
         Intent intent = new Intent(this, PlaceDetail.class);
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(placeExploreRequestModel.cityId);
-        arrayList.add(placeExploreRequestModel.cityId);
+        arrayList.add(placeExploreResponseModel.id);
+        arrayList.add(placeExploreResponseModel.id);
 
         intent.putExtra(AppConstant.CITIES_IDS, arrayList);
         intent.putExtra(AppConstant.COMING_FROM, AppConstant.COMING_FROM_PLACE_EXPLORE);
